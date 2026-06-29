@@ -1,0 +1,98 @@
+<form [formGroup]="studentSearchForm" >
+<div class="row mb-3 mt-3 align-items-center">
+  <div class="col-md-6">
+    <button
+      class="btn btn-success"
+      (click)="studentcreate()">
+      <i class="bi bi-plus-circle"></i> Create Student
+    </button>
+  </div>
+    
+  <div class="col-md-4">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="searchText"
+      placeholder="Search Student">
+  </div>
+
+  <div class="col-md-2">
+    <button
+      class="btn btn-primary"
+       (click)="searchStudents()">
+      Search
+    </button>
+  </div>
+
+</div>
+</form>
+
+        <div *ngIf="loading" class="text-center my-3">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="mt-2">Loading...</p>
+        </div>
+
+<table *ngIf="!loading" class="table table-striped mb-3">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Admission No</th>
+      <th>Name</th>
+      <th>Class</th>
+      <th>Section</th>
+      <th>Status</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let s of students">
+
+      <td>{{s.studentId}}</td>
+      <td>{{s.admissionNo}}</td>
+      <td>{{s.firstName}} {{s.lastName}}</td>
+      <td>{{s.className}}</td>
+      <td>{{s.sectionName}}</td>
+      <td>{{s.status}}</td>
+      <td>
+        <button
+          class="btn btn-sm btn-warning"
+          (click)="editStudent(s.studentId)"
+          type="button">
+           <i class="bi bi-pencil-square"></i> Edit
+        </button>
+      </td>
+      <td>
+        <button
+          class="btn btn-sm btn-danger"
+          (click)="deleteStudent(s.studentId)"
+          type="button">
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between">
+
+  <button
+    class="btn btn-secondary"
+    (click)="previousPage()">
+    Previous
+  </button>
+
+  <span>
+    Page {{page + 1}} of {{totalPages}}
+  </span>
+
+  <button
+    class="btn btn-secondary"
+    (click)="nextPage()">
+    Next
+  </button>
+
+</div>

@@ -1,0 +1,127 @@
+<!--<ul class="nav flex-column p-3 text-white" >
+    <li class="nav-item">
+        <a class="nav-link" href="students">Students</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="invoices">Invoices</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="myprofile">My Profile</a>
+    </li>
+</ul> -->
+
+ <!-- Sidebar -->
+  <!--  <div class=" bg-light col-md-2 text-dark min-vh-100 p-0 m-3" style="background-color: hsl(210, 2%, 78%);">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+        <a class="nav-link" href="students">Students</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="parent/create">Parent Create</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="parent/search">Parent Search</a>
+        </li>
+      </ul>
+    </div> -->
+
+    <div class="d-flex">
+  
+  <!-- Sidebar -->
+  <div class="bg-light text-dark p-3" style="width: 250px; min-height: 100vh;">
+    <h4>School Admin</h4>
+
+    <ul class="nav flex-column">
+
+      <li class="nav-item">
+        <a class="nav-link text-dark" routerLink="/dashboard">
+          Dashboard
+        </a>
+      </li>
+
+      <!-- Students Menu -->
+      <li class="nav-item">
+        <a
+          class="nav-link text-dark"
+          data-bs-toggle="collapse"
+          href="#studentMenu"
+          role="button"
+        >
+          Students ▼
+        </a>
+
+        <div class="collapse" id="studentMenu">
+          <ul class="nav flex-column ms-3">
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="/students">
+                Search Student
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="student/create">
+                Create Student
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Parent Menu -->
+      <li class="nav-item">
+        <a
+          class="nav-link text-dark"
+          data-bs-toggle="collapse"
+          href="#parentMenu"
+          role="button"
+        >
+          Parents ▼
+        </a>
+
+        <div class="collapse" id="parentMenu">
+          <ul class="nav flex-column ms-3">
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="parent/search">
+                Search Parent
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="parent/create">
+                Create Parent
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Invoice Menu -->
+      <li class="nav-item">
+        <a
+          class="nav-link text-dark"
+          data-bs-toggle="collapse"
+          href="#invoiceMenu"
+          role="button"
+        >
+          Invoices ▼
+        </a>
+
+        <div class="collapse" id="invoiceMenu">
+          <ul class="nav flex-column ms-3">
+            <li class="nav-item">
+              <a class="nav-link text-dark" routerLink="/invoices">
+                Invoice List
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" routerLink="/create-invoice">
+                Create Invoice
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+
+</div>
