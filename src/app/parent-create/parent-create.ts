@@ -30,9 +30,6 @@ createParent(): void {this.parentService.createParent(
       this.parentForm.value
     ).subscribe({
       next: (response:any) => {
-        alert('tets')
-
-       // alert("response.message");
         this.parentForm.reset();
       },
       

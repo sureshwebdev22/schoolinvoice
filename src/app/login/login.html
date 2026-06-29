@@ -15,9 +15,9 @@
 
             <div class="form-group mb-3">
               <label class="form-label">Username</label>
-              <input type="text" class="form-control form-control-lg" placeholder="Enter username" formControlName="username">
+              <input type="text" class="form-control form-control-lg" placeholder="Enter username" formControlName="email">
             </div>
-            <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger mb-3">
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger mb-3">
               Username is required.
               </div>
 

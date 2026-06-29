@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../services/auth';
+import { email } from '@angular/forms/signals';
 
 @Component({
   standalone: true,
@@ -18,36 +19,33 @@ export class Login {
 
   private formBuilder = inject(FormBuilder);
   private auth = inject(Auth);
-  private router = inject(Router); 
+  private router = inject(Router);
 
   constructor() {
     this.loginForm = this.formBuilder.group({
-      username: ['',[Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required]]
     });
 
   }
 
+  onSubmit(): void {
+    this.auth.login(
+      this.loginForm.value
+    ).subscribe({
+      next: (response: any) => {
+        localStorage.setItem(
+          'token',
+          response.accessToken
 
-  onSubmit() {
-    console.log('Form submitted:', this.loginForm.value);
-    console.log('Form valid:', this.loginForm.errors);
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      const success = this.auth.login(username, password);
-      if (success) {
-        this.router.navigate(['/home']); // Navigate to dashboard on successful login 
-        // Handle successful login, e.g., navigate to dashboard
-        console.log('Login successful');
-      } else {
-        // Handle failed login, e.g., show error message
-        console.log('Login failed');
+        );
+       this.router.navigate(['/home']); // Navigate to dashboard on successful login 
+      },
+
+      error: (err) => {
+        console.error(err);
       }
-    }
-
-    else {
-      console.log('Form is invalid');
-    }
+    });
   }
 
 }

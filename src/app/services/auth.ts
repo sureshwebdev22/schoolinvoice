@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
+  
+  private apiUrl = 'http://localhost:8080/api/auth/login';
+
+  constructor(private http: HttpClient) { }
 
   isAuthenticated(): boolean {
     // Implementation for checking authentication status
@@ -11,14 +17,8 @@ export class Auth {
    return localStorage.getItem('authToken') !== null;
   }
 
-  login(username: string, password: string): boolean {
-    // Implementation for login logic
-    // This is a simplified example - replace with actual login logic
-    if (username === 'admin' && password === 'password') {
-      localStorage.setItem('authToken', 'your-auth-token');
-      return true;
-    }
-    return false;
+  login(loginForm: any): Observable<any> {
+      return this.http.post<any>(this.apiUrl, loginForm);
   }
 
 }
