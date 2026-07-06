@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentServices } from '../../services/student-services';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Alertservice } from '../../services/alertservice';
+//import { Alertservice } from '../../services/alertservice';
 
 
 
@@ -19,7 +19,7 @@ export class EditStudent implements OnInit {
 
   student: any = {};
   private studentService = inject(StudentServices);
-  private alertService =inject(Alertservice);
+  //private alertService =inject(Alertservice);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   studentForm: FormGroup;
@@ -63,7 +63,7 @@ export class EditStudent implements OnInit {
       .subscribe({
         next: () => {
         //  alert('Student updated successfully');
-          this.alertService.success('Student updated successfully');
+      //    this.alertService.success('Student updated successfully');
 
           this.router.navigate(['/students']);
         },

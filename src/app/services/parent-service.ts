@@ -19,6 +19,6 @@ export class ParentService {
     return this.http.post(`${this.apiUrl}/search`, parent);
   } */
   searchParents(parent: Parent, page: number, size: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/search`, { ...parent, page, size });
+    return this.http.post(`${this.apiUrl}/search?page=${page}&size=${size}`, { ...parent });
   }
 }

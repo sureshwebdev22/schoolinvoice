@@ -10,44 +10,43 @@ import { CommonModule } from '@angular/common';
 })
 export class Alert {
 
- alert: any;
-  private timer: any;
+  
 
-  type = '';
-  message = '';
+  alert: any;
 
-  constructor(private alertService: Alertservice) {}
+  timer: any;
+
+  constructor(
+
+      private alertService: Alertservice
+
+  ) {}
 
   ngOnInit() {
-/*
-    this.alertService.alert$.subscribe(alert => {
 
-      this.type = alert.type;
-      this.message = alert.message;
+    this.alertService.alert$
 
-      setTimeout(() => {
-        this.message = '';
-      }, 3000);
+      .subscribe(alert => {
 
-    }); */
+        this.alert = alert;
 
+        if (this.timer) {
 
+          clearTimeout(this.timer);
 
-    this.alertService.alert$.subscribe(alert => {
+        }
 
-      this.alert = alert;
+        if (alert.message) {
 
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
+          this.timer = setTimeout(() => {
 
-      if (alert.message) {
-        this.timer = setTimeout(() => {
-          this.alertService.clear();
-        }, 2000);
-      }
+            this.alertService.clear();
 
-    });
+          }, 3000);
+
+        }
+
+      });
 
   }
 

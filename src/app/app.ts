@@ -3,12 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 import { NavBar } from "./nav-bar/nav-bar";
-import { Alert } from './shared/alert/alert';
 import { CommonModule } from '@angular/common';
+import { Alert } from "./shared/alert/alert";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,Header,Footer,NavBar,Alert,CommonModule],
+  imports: [Header, Footer, NavBar, CommonModule, RouterOutlet, Alert],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

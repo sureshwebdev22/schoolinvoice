@@ -1,13 +1,21 @@
- <div *ngIf="message"
-     class="alert alert-{{type}} alert-dismissible fade show">
+<div
+*ngIf="alert?.message"
 
-    {{message}}
+class="alert"
 
-    <button
-      type="button"
-      class="btn-close"
-      (click)="message=''">
-    </button>
+[ngClass]="{
 
-</div> 
+'alert-success':
+alert?.type==='success',
 
+'alert-danger':
+alert?.type==='error',
+
+'alert-warning':
+alert?.type==='warning'
+
+}">
+
+{{alert.message}}
+
+</div>

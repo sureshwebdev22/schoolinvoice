@@ -7,7 +7,7 @@ import { StudentServices } from '../../services/student-services';
 import { ParentSearch } from '../../parent-search/parent-search';
 import { ParentService } from '../../services/parent-service';
 import { SearchParent } from '../../parent/search-parent/search-parent';
-import { Alertservice } from '../../services/alertservice';
+//import { Alertservice } from '../../services/alertservice';
 
 @Component({
   selector: 'app-create-student',
@@ -23,7 +23,7 @@ export class CreateStudent {
   private studentService = inject(StudentServices);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private alertService =inject(Alertservice);
+  //private alertService =inject(Alertservice);
   studentForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     this.studentForm = this.formBuilder.group({
@@ -69,7 +69,7 @@ export class CreateStudent {
       .subscribe({
         next: () => {
        //   alert('Student created successfully');
-          this.alertService.success('Student created successfully');
+    //      this.alertService.success('Student created successfully');
           this.router.navigate(['/students']);
         },
         error: (err: any) => {

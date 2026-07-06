@@ -23,6 +23,8 @@ export class ParentSearch {
   page = 0;
   size = 10;
   totalPages = 0;
+  lastPages: boolean = false;
+  previousPages: boolean = false;
 
   private cdr = inject(ChangeDetectorRef);
 
@@ -45,8 +47,11 @@ export class ParentSearch {
     .searchParents(this.parentSearchForm.value, this.page, this.size)
     .subscribe(response => {
       this.parents = response.content;
-      this.cdr.detectChanges();
       this.totalPages = response.totalPages;
+      this.previousPages = response.first;
+      this.lastPages = response.last;
+      this.cdr.detectChanges();
+
       console.log(response);
     });
   }

@@ -64,7 +64,7 @@
 
   <button
     class="btn btn-secondary"
-    (click)="previousPage()">
+    (click)="previousPage()" *ngIf="!previousPages">
     Previous
   </button>
 
@@ -74,7 +74,7 @@
 
   <button
     class="btn btn-secondary"
-    (click)="nextPage()">
+    (click)="nextPage()" *ngIf="!lastPages">
     Next
   </button>
 
