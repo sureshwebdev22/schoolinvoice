@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class StudentServices {
-  private apiUrl = 'http://localhost:8080/api/students';
+  private apiUrl = 'http://localhost:8080/api/schooladmin/students';
 
   constructor(private http: HttpClient) { }
 
@@ -22,26 +22,26 @@ export class StudentServices {
 
   getStudentById(id: number) {
   return this.http.get<any>(
-    `http://localhost:8080/api/students/${id}`
+    `${this.apiUrl}/${id}`
   );
 }
 
 updateStudent(id: number, student: any) {
   return this.http.put(
-    `http://localhost:8080/api/students/${id}`,
+    `${this.apiUrl}/${id}`,
     student
   );  
 
 }
 createStudent(student: any) {
   return this.http.post(
-    `http://localhost:8080/api/students`,
+    `${this.apiUrl}`,
     student
   );
 }
 deleteStudent(id: number) {
   return this.http.delete(
-    `http://localhost:8080/api/students/${id}`
+    `${this.apiUrl}/${id}`
   );
 }
 }

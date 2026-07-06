@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-//import { Alertservice } from '../services/alertservice';
+import { Alertservice } from '../services/alertservice';
 import { timer } from 'rxjs';
 
 
@@ -28,7 +28,7 @@ export class Students implements OnInit {
 
   private router = inject(Router);
   private studentService = inject(StudentServices);
-  //private alertService = inject(Alertservice);
+  private alertService = inject(Alertservice);
   private cdr = inject(ChangeDetectorRef);
   studentSearchForm: FormGroup;
 
@@ -118,10 +118,10 @@ export class Students implements OnInit {
       next: (response: any) => {
         //  alert(response.message);
         this.cdr.detectChanges();
-     //   this.alertService.warning('Student Deleted successfully');
-        // this.router.navigate(['/students']);
+    //  this.alertService.warning('Student Deleted successfully');
+      //this.router.navigate(['/students']);
         // Refresh the student list
-        //     this.loadStudents();
+            this.loadStudents();
       },
       error: (err) => {
         console.error(err);
