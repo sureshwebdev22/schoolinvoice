@@ -3,6 +3,7 @@ import { ParentService } from '../services/parent-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { timer } from 'rxjs/internal/observable/timer';
 
 @Component({
   selector: 'app-parent-search',
@@ -25,6 +26,7 @@ export class ParentSearch {
   totalPages = 0;
   lastPages: boolean = false;
   previousPages: boolean = false;
+  loading = false;
 
   private cdr = inject(ChangeDetectorRef);
 
@@ -43,16 +45,22 @@ export class ParentSearch {
   }
 
   searchParents() {
-    this.parentService
-    .searchParents(this.parentSearchForm.value, this.page, this.size)
-    .subscribe(response => {
-      this.parents = response.content;
-      this.totalPages = response.totalPages;
-      this.previousPages = response.first;
-      this.lastPages = response.last;
-      this.cdr.detectChanges();
+    // this.page = 0;
+    this.loading = true;
 
-      console.log(response);
+    timer(500).subscribe(() => {
+      this.parentService
+        .searchParents(this.parentSearchForm.value, this.page, this.size)
+        .subscribe(response => {
+          this.loading = false;
+          this.parents = response.content;
+          this.totalPages = response.totalPages;
+          this.previousPages = response.first;
+          this.lastPages = response.last;
+          this.cdr.detectChanges();
+
+          console.log(response);
+        });
     });
   }
 
