@@ -60,16 +60,13 @@
 
                         <div class="mb-3 form-group">
                             <label class="form-label">Status</label>
-                    <!--        <input type="text" class="form-control" formControlName="status"> -->
-                            <select
-    id="status"
-    class="form-select"
-    formControlName="status">
+                            <!--        <input type="text" class="form-control" formControlName="status"> -->
+                            <select id="status" class="form-select" formControlName="status">
 
-    <option value="">-- Select Status --</option>
-    <option value="ACTIVE">Active</option>
-    <option value="INACTIVE">Inactive</option>
-  </select>
+                                <option value="">-- Select Status --</option>
+                                <option value="ACTIVE">Active</option>
+                                <option value="INACTIVE">Inactive</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -84,15 +81,12 @@
                             </div>
 
                             <div class="col-md-6 d-flex align-items-end p-0 ">
-                                <div class="mb-3 form-group">  <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#parentSearchModal">
+                                <div class="mb-3 form-group"> <button type="button" class="btn btn-primary"
+                                        data-bs-toggle="modal" data-bs-target="#parentSearchModal">
 
-                <i class="bi bi-search"></i>
+                                        <i class="bi bi-search"></i>
 
-            </button>
+                                    </button>
                                 </div>
                             </div>
 
@@ -118,6 +112,5 @@
 
 </div>
 
-<app-search-parent
-    (parentSelected)="onParentSelected($event)">
+<app-search-parent (parentSelected)="onParentSelected($event)">
 </app-search-parent>

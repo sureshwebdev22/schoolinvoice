@@ -70,6 +70,12 @@ export class Students implements OnInit {
             this.cdr.detectChanges();
             this.totalPages = (res as any).totalPages;
             this.totalElements = (res as any).totalElements;
+            console.log('Students:', this.students.length);
+             /* if (this.students.length === 0) {
+                         
+
+              this.alertService.warning('No students found');
+            } */
           }
         });
     });

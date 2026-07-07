@@ -5,12 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StudentServices } from '../../services/student-services';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Alertservice } from '../../services/alertservice';
+import { SearchParent } from '../../parent/search-parent/search-parent';
 
 
 
 @Component({
   selector: 'app-edit-student',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule , SearchParent],
   templateUrl: './edit-student.html',
   styleUrls: ['./edit-student.css'],
 })
@@ -33,14 +34,15 @@ export class EditStudent implements OnInit {
       'gender': ['', Validators.required],
       'className': ['', Validators.required],
       'sectionName': [''],
+      'parentId': [''],
+       'parentName': [''],
       'status': ['']
     });
-
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.studentService.getStudentById(id)
       .subscribe({
-        next: (data :any) => {
+        next: (data: any) => {
           this.student = data;
           console.log(this.student);
           this.studentForm.setValue({
@@ -50,7 +52,9 @@ export class EditStudent implements OnInit {
             'gender': this.student.gender,
             'className': this.student.className,
             'sectionName': this.student.sectionName,
-            'status': this.student.status
+            'status': this.student.status,
+            'parentId': this.student.parentId,
+             'parentName': this.student.parentName,
           });
         },
         error: (err: any) => {
@@ -74,6 +78,18 @@ export class EditStudent implements OnInit {
         }
       });
   }
+
+  onParentSelected(parent: any) {
+
+    console.log("Selected Parent:", parent);
+
+
+  this.studentForm.patchValue({
+    parentId: parent.parentId,
+    parentName:parent.fatherName +"," + parent.motherName
+  });
+
+}
 
   ngOnInit(): void {
     
