@@ -102,8 +102,8 @@ onParentSelected(parent: any) {
 
 
   this.studentForm.patchValue({
-    parentId: parent.parentId,
-    parentName:parent.fatherName +"," + parent.motherName
+    parentId: parent.id,
+    parentName:parent.fullName
   });
 
 }

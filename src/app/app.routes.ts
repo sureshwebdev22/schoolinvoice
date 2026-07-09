@@ -10,6 +10,8 @@ import { ParentCreate } from './parent-create/parent-create';
 import { ParentSearch } from './parent-search/parent-search';
 import { CreateStudent } from './students/create-student/create-student';
 import { SearchParent } from './parent/search-parent/search-parent';
+import { CreateUser } from './user/create-user/create-user';
+import { SearchUser } from './user/search-user/search-user';
 
 export const routes: Routes = [
     { path: 'home', component: Home ,canActivate: [authGuard]},
@@ -21,5 +23,9 @@ export const routes: Routes = [
     { path: 'parent/create', component: ParentCreate ,canActivate: [authGuard]},
     {path: 'student/create', component: CreateStudent ,canActivate: [authGuard]},
     {path: 'parent/search', component: ParentSearch ,canActivate: [authGuard]},
+    {path: 'user/create', component: CreateUser ,canActivate: [authGuard]},
+    {path: 'user/search', component: SearchUser ,canActivate: [authGuard]},
+
+
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

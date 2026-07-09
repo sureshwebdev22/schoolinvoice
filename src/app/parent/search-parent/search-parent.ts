@@ -38,8 +38,9 @@ export class SearchParent {
   constructor(private fb: FormBuilder) {
 
     this.parentSearchForm = this.fb.group({
-      fatherName: [''],
-      motherName: [''],
+      fullName: [''],
+      email: [''],
+      mobileNo: [''],
       address: ['']
     });
   }

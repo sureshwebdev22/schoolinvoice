@@ -1,0 +1,98 @@
+<form [formGroup]="userSearchForm" >
+<div class="row mb-3 mt-3 align-items-center">
+  <div class="col-md-6">
+    <button
+      class="btn btn-success"
+      (click)="usercreate()">
+      <i class="bi bi-plus-circle"></i> Create User
+    </button>
+  </div>
+    
+  <div class="col-md-4">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="searchText"
+      placeholder="Search User">
+  </div>
+
+  <div class="col-md-2">
+    <button
+      class="btn btn-primary"
+       (click)="searchUsers()">
+      Search
+    </button>
+  </div>
+
+</div>
+</form>
+
+        <div *ngIf="loading" class="text-center my-3">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="mt-2">Loading...</p>
+        </div>
+
+<table *ngIf="!loading" class="table table-striped mb-3">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Full Name</th>
+      <th>Gender</th>
+      <th>Mobile No</th>
+      <th>Role</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let user of users">
+
+      <td>{{user.id}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.fullName}} </td>
+      <td>{{user.gender}}</td>
+      <td>{{user.mobileNo}}</td>
+      <td>{{user.role}}</td>
+      <td>
+        <button
+          class="btn btn-sm btn-warning"
+          (click)="editUser(user.id)"
+          type="button">
+           <i class="bi bi-pencil-square"></i> Edit
+        </button>
+      </td>
+      <td>
+        <button
+          class="btn btn-sm btn-danger"
+          (click)="deleteUser(user.id)"
+          type="button">
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between">
+
+  <button
+    class="btn btn-secondary"
+    (click)="previousPage()">
+    Previous
+  </button>
+
+  <span>
+    Page {{page + 1}} of {{totalPages}}
+  </span>
+
+  <button
+    class="btn btn-secondary"
+    (click)="nextPage()">
+    Next
+  </button>
+
+</div>

@@ -13,17 +13,22 @@
           <!-- SEARCH -->
           <div class="row mb-3">
 
-            <div class="col-md-4">
-              <label>Father Name</label>
-              <input class="form-control" formControlName="fatherName" [formGroup]="parentSearchForm">
+            <div class="col-md-3">
+              <label>Full Name</label>
+              <input class="form-control" formControlName="fullName" [formGroup]="parentSearchForm">
             </div>
 
-            <div class="col-md-4">
-              <label>Mother Name</label>
-              <input class="form-control" formControlName="motherName" [formGroup]="parentSearchForm">
+            <div class="col-md-3">
+              <label>Email</label>
+              <input class="form-control" formControlName="email" [formGroup]="parentSearchForm">
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
+              <label>Mobile No</label>
+              <input class="form-control" formControlName="mobileNo" [formGroup]="parentSearchForm">
+            </div>
+
+            <div class="col-md-3">
               <label>Address</label>
               <input class="form-control" formControlName="address" [formGroup]="parentSearchForm">
             </div>
@@ -52,17 +57,20 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Father</th>
-              <th>Mother</th>
-              <th>Action</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Mobile No</th>
+              <th>Address</th>
             </tr>
           </thead>
 
           <tbody>
             <tr *ngFor="let p of parents">
-              <td>{{p.parentId}}</td>
-              <td>{{p.fatherName}}</td>
-              <td>{{p.motherName}}</td>
+              <td>{{p.id}}</td>
+              <td>{{p.fullName}}</td>
+              <td>{{p.email}}</td>
+              <td>{{p.mobileNo}}</td>
+              <td>{{p.address}}</td>
               <td>
                 <button class="btn btn-success btn-sm" (click)="selectParent(p)">
                   Select
