@@ -42,8 +42,7 @@
       <th>Class</th>
       <th>Section</th>
       <th>Status</th>
-      <th>Edit</th>
-      <th>Delete</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -56,22 +55,28 @@
       <td>{{s.className}}</td>
       <td>{{s.sectionName}}</td>
       <td>{{s.status}}</td>
-      <td>
-        <button
-          class="btn btn-sm btn-warning"
-          (click)="editStudent(s.studentId)"
-          type="button">
-           <i class="bi bi-pencil-square"></i> Edit
-        </button>
-      </td>
-      <td>
-        <button
-          class="btn btn-sm btn-danger"
-          (click)="deleteStudent(s.studentId)"
-          type="button">
-          <i class="bi bi-trash"></i> Delete
-        </button>
-      </td>
+      <td class="text-nowrap">
+    <button class="btn btn-sm btn-outline-primary me-1"
+            title="View" (click)="viewStudent(s.studentId)">
+        <i class="bi bi-eye"></i>
+    </button>
+
+    <button class="btn btn-sm btn-outline-success me-1"
+            title="Add">
+        <i class="bi bi-plus-circle"></i>
+    </button>
+
+    <button class="btn btn-sm btn-outline-warning me-1"
+            title="Edit" (click)="editStudent(s.studentId)">
+        <i class="bi bi-pencil-square"></i>
+    </button>
+
+    <button class="btn btn-sm btn-outline-info"
+            title="Create Invoice">
+        <i class="bi bi-receipt"></i>
+    </button>
+</td>
+      
     </tr>
   </tbody>
 

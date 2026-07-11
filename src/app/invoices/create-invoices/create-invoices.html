@@ -1,0 +1,193 @@
+<div class="container mt-4">
+
+<div class="card shadow">
+
+<div class="card-header bg-secondary text-white">
+<h5>Create Student Invoice</h5>
+</div>
+
+<div class="card-body" [formGroup]="invoiceForm">
+
+<div class="row mb-3">
+
+<div class="col-md-4">
+<label>Invoice No</label>
+<input class="form-control"
+formControlName="invoiceNumber">
+</div>
+
+<div class="col-md-4">
+<label>Invoice Date</label>
+<input type="date"
+class="form-control"
+formControlName="invoiceDate">
+</div>
+
+<div class="col-md-4">
+<label>Due Date</label>
+<input type="date"
+class="form-control"
+formControlName="dueDate">
+</div>
+
+</div>
+
+<hr>
+
+<h5>Student Details</h5>
+
+<div class="row">
+
+<div class="col-md-3">
+<label>Admission No</label>
+<input class="form-control"
+formControlName="admissionNo">
+</div>
+
+<div class="col-md-3">
+<label>Student Name</label>
+<input class="form-control"
+formControlName="studentName">
+</div>
+
+<div class="col-md-3">
+<label>Class</label>
+<input class="form-control"
+formControlName="className">
+</div>
+
+<div class="col-md-3">
+<label>Parent</label>
+<input class="form-control"
+formControlName="parentName">
+</div>
+
+</div>
+
+<hr>
+
+<h5>Fee Details</h5>
+
+<table class="table table-bordered" formArrayName="invoiceItems">
+
+<thead>
+
+<tr>
+<th>Fee Type</th>
+<th>Amount</th>
+<th>Discount</th>
+<th>Total</th>
+<th></th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr *ngFor="let item of invoiceItems.controls; let i=index"
+[formGroupName]="i">
+
+<td>
+
+<select class="form-select" formControlName="feeType">
+
+<option value="">Select</option>
+
+<option *ngFor="let fee of feeTypes">
+{{fee}}
+</option>
+
+</select>
+
+</td>
+
+<td>
+<input class="form-control"
+type="number"
+formControlName="amount"
+(input)="calculateTotal()">
+</td>
+
+<td>
+<input class="form-control"
+type="number"
+formControlName="discount"
+(input)="calculateTotal()">
+</td>
+
+<td>
+<input class="form-control"
+formControlName="total">
+</td>
+
+<td>
+<button class="btn btn-danger btn-sm"
+type="button"
+(click)="removeFeeItem(i)">
+Delete
+</button>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<button
+class="btn btn-success"
+type="button"
+(click)="addFeeItem()">
+Add Fee
+</button>
+
+<hr>
+
+<div class="row">
+
+<div class="col-md-8">
+<textarea
+rows="3"
+class="form-control"
+placeholder="Remarks"
+formControlName="remarks">
+</textarea>
+</div>
+
+<div class="col-md-4">
+
+<div class="alert alert-info">
+
+<h5>
+Grand Total :
+₹ {{grandTotal}}
+</h5>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<button
+class="btn btn-primary me-2"
+(click)="saveInvoice()">
+
+Save Invoice
+
+</button>
+
+<button
+class="btn btn-secondary">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>

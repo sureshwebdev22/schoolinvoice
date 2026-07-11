@@ -110,30 +110,21 @@ export class Students implements OnInit {
   }
 
   deleteStudent(studentId: any) {
-    /*
-    this.studentService.deleteStudent(studentId).subscribe(() => {
-  //this.loadStudents();
-      
-         //   alert('Student created successfully');
-          this.alertService.success('Student Deleted successfully');
-           this.router.navigate(['/students']);
-  
-        
-    }); */
+    
     this.studentService.deleteStudent(studentId).subscribe({
       next: (response: any) => {
-        //  alert(response.message);
         this.cdr.detectChanges();
-    //  this.alertService.warning('Student Deleted successfully');
-      //this.router.navigate(['/students']);
-        // Refresh the student list
-            this.loadStudents();
+        this.loadStudents();
       },
       error: (err) => {
         console.error(err);
         alert('Failed to delete student');
       }
     });
+  }
+
+  viewStudent(studentId: any) {
+    this.router.navigate(['/view-student/', studentId]);
   }
 
 
