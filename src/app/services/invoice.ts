@@ -18,4 +18,8 @@ export class Invoice {
       invoice
     );
   }
+
+  getNextInvoiceNumber(): Observable<{ nextInvoiceNumber: string }> {
+    return this.http.get<{ nextInvoiceNumber: string }>(`${this.apiUrl}/next-number`);
+  }
 }

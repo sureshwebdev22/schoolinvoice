@@ -2,12 +2,14 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentServices } from '../../services/student-services';
+import id from '@angular/common/locales/extra/id';
 
 @Component({
   selector: 'app-view-student',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './view-student.html',
-  styleUrl: './view-student.css',
+  styleUrls: ['./view-student.css'],
 })
 export class ViewStudent {
 
@@ -57,8 +59,13 @@ export class ViewStudent {
   }
 
   addInvoice():void {
-    const studentId = this.student.id;
-    this.router.navigate(['/invoices/create'], { queryParams: { studentId } });
+  //  const studentId = this.student.id;
+    
+  console.log('id  ' +this.route.snapshot.paramMap.get('id'));
+  //  this.router.navigate(['/invoices/create', id]);
+    
+    this.router.navigate(['/invoices/create', this.route.snapshot.paramMap.get('id')]);
+    //this.router.navigate(['/invoices/create'], { queryParams: { id } });
   }
 
 }
