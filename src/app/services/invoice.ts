@@ -22,4 +22,20 @@ export class Invoice {
   getNextInvoiceNumber(): Observable<{ nextInvoiceNumber: string }> {
     return this.http.get<{ nextInvoiceNumber: string }>(`${this.apiUrl}/next-number`);
   }
+
+  getInvoices(searchText: string): Observable<Invoice[]> {
+    return this.http.get<Invoice[]>(`${this.apiUrl}?search=${searchText}`);
+  }
+
+  getInvoiceById(invoiceId: number): Observable<Invoice> {
+    return this.http.get<Invoice>(`${this.apiUrl}/${invoiceId}`);
+  }
+
+  updateInvoice(invoiceId: number, invoice: Invoice): Observable<Invoice> {
+    return this.http.put<Invoice>(`${this.apiUrl}/${invoiceId}`, invoice);
+  }
+
+  deleteInvoice(invoiceId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${invoiceId}`);
+  }
 }

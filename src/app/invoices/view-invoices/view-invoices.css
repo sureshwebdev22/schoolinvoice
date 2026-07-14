@@ -1,0 +1,25 @@
+.invoice-popup {
+
+    position: absolute;
+    top: 25px;
+    left: -150px;
+
+    width: 350px;
+
+    background: rgb(197, 38, 38);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+
+    padding: 10px;
+
+    z-index: 9999;
+}
+
+.invoice-popup table{
+    margin-bottom:0;
+}
+
+.position-relative{
+    position:relative;
+}

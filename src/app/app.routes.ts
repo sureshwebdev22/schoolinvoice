@@ -14,6 +14,7 @@ import { CreateUser } from './user/create-user/create-user';
 import { SearchUser } from './user/search-user/search-user';
 import { ViewStudent } from './student/view-student/view-student';
 import { CreateInvoices } from './invoices/create-invoices/create-invoices';
+import { ViewInvoices } from './invoices/view-invoices/view-invoices';
 
 export const routes: Routes = [
     { path: 'home', component: Home ,canActivate: [authGuard]},
@@ -30,6 +31,7 @@ export const routes: Routes = [
     {path: 'parent/search/:id', component: SearchParent ,canActivate: [authGuard]},
     {path: 'view-student/:id', component: ViewStudent ,canActivate: [authGuard]},
     {path: 'invoices/create/:id', component: CreateInvoices ,canActivate: [authGuard]},
+    {path :'invoices/view', component: ViewInvoices ,canActivate: [authGuard]},
 
 
     { path: '', redirectTo: '/home', pathMatch: 'full' }
