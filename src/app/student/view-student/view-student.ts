@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentServices } from '../../services/student-services';
 import id from '@angular/common/locales/extra/id';
+import { CommonModule, DatePipe } from '@angular/common';
+import { disabled } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-view-student',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './view-student.html',
   styleUrls: ['./view-student.css'],
 })
@@ -22,13 +24,13 @@ export class ViewStudent {
 
   constructor(private formBuilder: FormBuilder) {
     this.studentForm = this.formBuilder.group({
-      'admissionNo': ['', Validators.required],
+      'admissionNo': [{ value: '', disabled: true }, Validators.required],
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required],
       'gender': ['', Validators.required],
       'className': ['', Validators.required],
       'sectionName': [''],
-      'fullName': [''],
+      'parentName': [''],
     //  'parentId': [''],
       // 'parentName': [''],
       'status': ['']
@@ -49,13 +51,14 @@ export class ViewStudent {
             'sectionName': this.student.sectionName,
             'status': this.student.status,
        //     'parentId': this.student.parentId,
-             'fullName': this.student.fullName,
+             'parentName': this.student.parentName,
           });
         },
         error: (err: any) => {
           console.error(err);
         }
       });
+      this.studentForm.disable();
   }
 
   addInvoice():void {

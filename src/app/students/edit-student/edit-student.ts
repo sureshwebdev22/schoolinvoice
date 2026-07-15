@@ -54,7 +54,7 @@ export class EditStudent implements OnInit {
             'sectionName': this.student.sectionName,
             'status': this.student.status,
             'parentId': this.student.parentId,
-             'parentName': this.student.parentName,
+            'parentName': this.student.parentName,
           });
         },
         error: (err: any) => {
@@ -83,10 +83,10 @@ export class EditStudent implements OnInit {
 
     console.log("Selected Parent:", parent);
 
-
+//
   this.studentForm.patchValue({
     parentId: parent.parentId,
-    parentName:parent.fatherName +"," + parent.motherName
+    parentName:parent.fullName
   });
 
 }

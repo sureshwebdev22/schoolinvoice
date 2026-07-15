@@ -74,7 +74,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3 form-group">
                                     <label class="form-label">Parent Name</label>
-                                    <input type="text" class="form-control" formControlName="fullName" readonly>
+                                    <input type="text" class="form-control" formControlName="parentName" readonly>
 
                                 </div>
                             </div>
@@ -108,26 +108,4 @@
 
         </div>
     </div>
-    <div class="card">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Invoice Number</th>
-                    <th>Invoice Date</th>
-                    <th>Due Date</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let invoice of invoices">
-                    <td><a [routerLink]="['/invoices/view', invoice.invoiceID]">{{ invoice.invoiceNumber }}</a></td>
-                    <td>{{ invoice.invoiceDate | date }}</td>
-                    <td>{{ invoice.dueDate | date }}</td>
-                    <td>{{ invoice.amount }}</td>
-                    <td>{{ invoice.status }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+  
