@@ -108,5 +108,26 @@
 
         </div>
     </div>
-
+    <div class="card">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Invoice Number</th>
+                    <th>Invoice Date</th>
+                    <th>Due Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let invoice of invoices">
+                    <td><a [routerLink]="['/invoices/view', invoice.invoiceID]">{{ invoice.invoiceNumber }}</a></td>
+                    <td>{{ invoice.invoiceDate | date }}</td>
+                    <td>{{ invoice.dueDate | date }}</td>
+                    <td>{{ invoice.amount }}</td>
+                    <td>{{ invoice.status }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

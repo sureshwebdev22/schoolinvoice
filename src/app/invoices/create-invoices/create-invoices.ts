@@ -5,13 +5,14 @@ import { ActivatedRoute } from '@angular/router';
 import { StudentServices } from '../../services/student-services';
 import { Invoice } from '../../services/invoice';
 import { Alertservice } from '../../services/alertservice';
+import { ModalStudentSearch } from '../../student/modal-student-search/modal-student-search';
 
 
 
 @Component({
   selector: 'app-create-invoices',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ModalStudentSearch],
   templateUrl: './create-invoices.html',
   styleUrls: ['./create-invoices.css'],
 })
@@ -66,9 +67,12 @@ export class CreateInvoices implements OnInit {
           admissionNo: student.admissionNo,
           studentName: student.firstName + ' ' + student.lastName,
           className: student.className,
-          parentName: student.fullName // Assuming fullName is the parent's name; adjust as necessary
+          parentName: student.parentName // Assuming parentName is the parent's name; adjust as necessary
         });
       });
+    }
+    else{
+
     }
 
     this.addFeeItem();
@@ -137,4 +141,45 @@ export class CreateInvoices implements OnInit {
     });
 
   }
+  searchStudent() {
+    const studentId = this.invoiceForm.get('studentId')?.value;
+    if (studentId) {
+      this.studentService.getStudentById(Number(studentId)).subscribe({
+        next: (student: any) => {
+          this.invoiceForm.patchValue({
+            admissionNo: student.admissionNo,
+            studentName: student.firstName + ' ' + student.lastName,
+            className: student.className,
+            parentName: student.parentName // Assuming parentName is the parent's name; adjust as necessary
+          });
+        },
+        error: (error: any) => {
+          console.error('Error fetching student:', error);
+          this.alertService.error('Error fetching student');
+        }
+      });
+    } else {
+      this.alertService.warning('Please enter a valid Student ID');
+    }
+  }
+
+  onStudentSelected(student: any) {
+
+    console.log("Selected Student1:", student);
+
+          this.invoiceForm.get('admissionNo')?.setValue(student.admissionNo),
+          this.invoiceForm.get('studentName')?.setValue(student.firstName + ' ' + student.lastName),
+          this.invoiceForm.get('className')?.setValue(student.className),
+          this.invoiceForm.get('parentName')?.setValue(student.parentName),
+          this.invoiceForm.get('studentId')?.setValue(student.studentId);
+
+
+  /*this.invoiceForm.patchValue({
+    admissionNo: student.admissionNo,
+    studentName: student.firstName + ' ' + student.lastName,
+    className: student.className,
+    parentName: student.parentName
+  }); */
+
+}
 }

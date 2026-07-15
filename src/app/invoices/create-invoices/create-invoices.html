@@ -51,16 +51,25 @@ formControlName="studentName">
 </div>
 
 <div class="col-md-3">
-<label>Class</label>
+<label>Class Name</label>
 <input class="form-control"
 formControlName="className">
 </div>
 
-<div class="col-md-3">
+<div class="col-md-2">
 <label>Parent</label>
 <input class="form-control"
 formControlName="parentName">
 </div>
+<div class="col-md-1">
+<div class="mb-3 form-group"> <button type="button" class="btn btn-primary"
+                                        data-bs-toggle="modal" data-bs-target="#studentSearchModal">
+
+                                        <i class="bi bi-search"></i>
+
+                                    </button>
+                                </div>
+                                </div>
 
 </div>
 
@@ -191,3 +200,5 @@ Cancel
 </div>
 
 </div>
+<app-modal-student-search (studentSelected)="onStudentSelected($event)"    ></app-modal-student-search>
+

@@ -23,8 +23,8 @@ export class Invoice {
     return this.http.get<{ nextInvoiceNumber: string }>(`${this.apiUrl}/next-number`);
   }
 
-  getInvoices(searchText: string): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(`${this.apiUrl}?search=${searchText}`);
+  getInvoices(searchText: string, page: number, size: number): Observable<Invoice[]> {
+    return this.http.get<Invoice[]>(`${this.apiUrl}?search=${searchText}&page=${page}&size=${size}`);
   }
 
   getInvoiceById(invoiceId: number): Observable<Invoice> {

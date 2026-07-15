@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
@@ -44,4 +45,9 @@ deleteStudent(id: number) {
     `${this.apiUrl}/${id}`
   );
 }
+
+searchStudents(student: any, page: number, size: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/search?page=${page}&size=${size}`, { ...student });
+  }
+
 }

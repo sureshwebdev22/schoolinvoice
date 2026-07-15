@@ -53,7 +53,9 @@ export class ViewInvoices {
     timer(500).subscribe(() => {
       this.invoiceService
         .getInvoices(
-          this.invoiceSearchForm.value.searchText
+          this.invoiceSearchForm.value.searchText,
+          this.page,
+          this.size
         )
         .subscribe((res: any) => {
           if (res && typeof res === 'object') {
