@@ -105,7 +105,7 @@ export class ListInvoices {
   }
 
   editInvoice(invoiceId: any) {
-    this.router.navigate(['/edit-invoice', invoiceId]);
+    this.router.navigate([`/edit-invoice/${invoiceId}`]);
   }
 
   deleteInvoice(invoiceId: any) {
@@ -123,7 +123,7 @@ export class ListInvoices {
   }
 
   viewInvoice(invoiceId: any) {
-    this.router.navigate(['/view-invoice/', invoiceId]);
+    this.router.navigate([`invoices/view-invoice/${invoiceId}`]);
   }
 
 

@@ -5,7 +5,7 @@ import { Alertservice } from '../../services/alertservice';
 //import { StudentServices } from '../../services/student-services';
 import { StudentServices } from '../../services/student-services';
 //import { ActivatedRoute } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '../../services/invoice';
 import { CommonModule } from '@angular/common';
 import { disabled } from '@angular/forms/signals';
@@ -35,6 +35,7 @@ export class ViewInvoice {
   private studentService = inject(StudentServices);
   private invoiceService = inject(Invoice);
   private alertService = inject(Alertservice);
+  private router = inject(Router);
 
   ngOnInit(): void {
 
@@ -125,8 +126,13 @@ export class ViewInvoice {
     invoiceItemsArray.removeAt(index);
   }  */
 
-  saveInvoice() {
+  createInvoice() {
+    this.router.navigateByUrl('/invoices/create');
 
+  }
+  cancelInvoice() {
+    // Navigate back to the invoice list or previous page
+    window.history.back();
   }
 } 
       
