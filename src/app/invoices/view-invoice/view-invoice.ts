@@ -113,19 +113,6 @@ export class ViewInvoice {
     return this.invoiceForm.get('invoiceItems') as FormArray;
   }
 
-  /* addInvoiceItem() {
-    const invoiceItemsArray = this.invoiceForm.get('invoiceItems') as FormArray;
-    invoiceItemsArray.push(this.fb.group({
-      feeType: ['', Validators.required],
-      amount: [0, [Validators.required, Validators.min(0)]]
-    }));
-  }
-
-  removeInvoiceItem(index: number) {
-    const invoiceItemsArray = this.invoiceForm.get('invoiceItems') as FormArray;
-    invoiceItemsArray.removeAt(index);
-  }  */
-
   createInvoice() {
     this.router.navigateByUrl('/invoices/create');
 
