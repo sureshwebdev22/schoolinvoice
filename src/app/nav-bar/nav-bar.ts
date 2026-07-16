@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Auth } from '../services/auth';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nav-bar',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './nav-bar.html',
   styleUrl: './nav-bar.css',
 })

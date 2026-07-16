@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -23,18 +22,18 @@ export class Auth {
   }
 
   getRole(): string | null {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      return null;
+    }
+     const response = JSON.parse(token);
+    // token is a string (JWT) stored in localStorage
+    console.log('Role from localStorage:', response.role); // Log the token for debugging
 
-  const token = localStorage.getItem('token');
 
-  if (!token) {
-    return null;
+    return response.role;
   }
-
-  const decoded: any = jwtDecode(token);
-  console.log('Decoded token:', decoded); // Log the decoded token for debugging
-
-  return decoded.role;
-}
 
 
 
