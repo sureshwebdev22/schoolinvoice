@@ -32,8 +32,8 @@ export const routes: Routes = [
     {path: 'parent/search/:id', component: SearchParent ,canActivate: [authGuard]},
     {path: 'view-student/:id', component: ViewStudent ,canActivate: [authGuard]},
     {path: 'invoices/create/:id', component: CreateInvoices ,canActivate: [authGuard]},
-    {path :'invoices/view', component: ListInvoices ,canActivate: [authGuard]},    
-    {path :'invoices/view-invoice/:id', component: ViewInvoice ,canActivate: [authGuard]},    
+    {path :'invoices/list', component: ListInvoices ,canActivate: [authGuard]},    
+    {path :'invoices/list-invoice/:id', component: ViewInvoice ,canActivate: [authGuard]},    
     {path: 'invoices/create', component: CreateInvoices ,canActivate: [authGuard]},
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

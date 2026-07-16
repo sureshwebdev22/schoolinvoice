@@ -123,7 +123,7 @@ export class ListInvoices {
   }
 
   viewInvoice(invoiceId: any) {
-    this.router.navigate([`invoices/view-invoice/${invoiceId}`]);
+    this.router.navigate([`invoices/list-invoice/${invoiceId}`]);
   }
 
 

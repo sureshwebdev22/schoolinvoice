@@ -36,9 +36,12 @@ export class Login {
       next: (response: any) => {
         localStorage.setItem(
           'token',
-          response.accessToken
-
+          JSON.stringify(response)
         );
+     /*   localStorage.setItem(
+          'role',
+          response.role
+        );*/
        this.router.navigate(['/home']); // Navigate to dashboard on successful login 
       },
 
