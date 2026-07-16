@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewInvoices } from './view-invoices';
+import { ViewInvoice } from './view-invoice';
 
-describe('ViewInvoices', () => {
-  let component: ViewInvoices;
-  let fixture: ComponentFixture<ViewInvoices>;
+describe('ViewInvoice', () => {
+  let component: ViewInvoice;
+  let fixture: ComponentFixture<ViewInvoice>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewInvoices],
+      imports: [ViewInvoice],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ViewInvoices);
+    fixture = TestBed.createComponent(ViewInvoice);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,3 +1,4 @@
+
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -7,12 +8,13 @@ import { Alertservice } from '../../services/alertservice';
 import { timer } from 'rxjs/internal/observable/timer';
 
 @Component({
-  selector: 'app-view-invoices',
+  selector: 'app-list-invoices',
   imports: [ReactiveFormsModule , CommonModule],
-  templateUrl: './view-invoices.html',
-  styleUrl: './view-invoices.css',
+  templateUrl: './list-invoices.html',
+  styleUrl: './list-invoices.css',
 })
-export class ViewInvoices {
+export class ListInvoices {
+  
 
   invoices: any[] = [];
 
@@ -123,6 +125,7 @@ export class ViewInvoices {
   viewInvoice(invoiceId: any) {
     this.router.navigate(['/view-invoice/', invoiceId]);
   }
+
 
 
 

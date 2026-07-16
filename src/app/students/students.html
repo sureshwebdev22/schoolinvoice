@@ -1,36 +1,28 @@
-<form [formGroup]="studentSearchForm" >
-<div class="row mb-3 mt-3 align-items-center">
-  <div class="col-md-6">
-    <button
-      class="btn btn-success"
-      (click)="studentcreate()">
-      <i class="bi bi-plus-circle"></i> Create Student
-    </button>
-  </div>
-    
-  <div class="col-md-4">
-    <input
-      type="text"
-      class="form-control"
-      formControlName="searchText"
-      placeholder="Search Student">
-  </div>
+<form [formGroup]="studentSearchForm">
+  <div class="row mb-3 mt-3 align-items-center">
+    <div class="col-md-6">
+      <button class="btn btn-success" (click)="studentcreate()">
+        <i class="bi bi-plus-circle"></i> Create Student
+      </button>
+    </div>
 
-  <div class="col-md-2">
-    <button
-      class="btn btn-primary"
-       (click)="searchStudents()">
-      Search
-    </button>
-  </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control" formControlName="searchText" placeholder="Search Student">
+    </div>
 
-</div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" (click)="searchStudents()">
+        Search
+      </button>
+    </div>
+
+  </div>
 </form>
 
-        <div *ngIf="loading" class="text-center my-3">
-          <div class="spinner-border text-primary" role="status"></div>
-          <p class="mt-2">Loading...</p>
-        </div>
+<div *ngIf="loading" class="text-center my-3">
+  <div class="spinner-border text-primary" role="status"></div>
+  <p class="mt-2">Loading...</p>
+</div>
 
 <table *ngIf="!loading" class="table table-striped mb-3">
 
@@ -56,27 +48,23 @@
       <td>{{s.sectionName}}</td>
       <td>{{s.status}}</td>
       <td class="text-nowrap">
-    <button class="btn btn-sm btn-outline-primary me-1"
-            title="View" (click)="viewStudent(s.studentId)">
-        <i class="bi bi-eye"></i>
-    </button>
+        <button class="btn btn-sm btn-outline-primary me-1" title="View" (click)="viewStudent(s.studentId)">
+          <i class="bi bi-eye"></i>
+        </button>
 
-    <button class="btn btn-sm btn-outline-success me-1"
-            title="Add">
-        <i class="bi bi-plus-circle"></i>
-    </button>
+        <button class="btn btn-sm btn-outline-success me-1" title="Add">
+          <i class="bi bi-plus-circle"></i>
+        </button>
 
-    <button class="btn btn-sm btn-outline-warning me-1"
-            title="Edit" (click)="editStudent(s.studentId)">
-        <i class="bi bi-pencil-square"></i>
-    </button>
+        <button class="btn btn-sm btn-outline-warning me-1" title="Edit" (click)="editStudent(s.studentId)">
+          <i class="bi bi-pencil-square"></i>
+        </button>
 
-    <button class="btn btn-sm btn-outline-info"
-            title="Create Invoice">
-        <i class="bi bi-receipt"></i>
-    </button>
-</td>
-      
+        <button class="btn btn-sm btn-outline-info" title="Create Invoice">
+          <i class="bi bi-receipt"></i>
+        </button>
+      </td>
+
     </tr>
   </tbody>
 
@@ -84,9 +72,7 @@
 
 <div class="d-flex justify-content-between">
 
-  <button
-    class="btn btn-secondary"
-    (click)="previousPage()">
+  <button class="btn btn-secondary" (click)="previousPage()">
     Previous
   </button>
 
@@ -94,9 +80,7 @@
     Page {{page + 1}} of {{totalPages}}
   </span>
 
-  <button
-    class="btn btn-secondary"
-    (click)="nextPage()">
+  <button class="btn btn-secondary" (click)="nextPage()">
     Next
   </button>
 

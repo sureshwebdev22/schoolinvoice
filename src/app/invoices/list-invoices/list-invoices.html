@@ -44,6 +44,7 @@
       <th>Due Date</th>
       <th>Student Id</th>
       <th>Invoice Items</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -88,6 +89,24 @@
                 </div>
 
             </td>
+            <td class="text-nowrap">
+        <button class="btn btn-sm btn-outline-primary me-1" title="View" (click)="viewInvoice(i.invoiceID)">
+          <i class="bi bi-eye"></i>
+        </button>
+
+        <button class="btn btn-sm btn-outline-success me-1" title="Add">
+          <i class="bi bi-plus-circle"></i>
+        </button>
+
+        <button class="btn btn-sm btn-outline-warning me-1" title="Edit" (click)="editInvoice(i.invoiceID)">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+
+        <button class="btn btn-sm btn-outline-info" title="Create Invoice">
+          <i class="bi bi-receipt"></i>
+        </button>
+      </td>
+
     </tr>
   </tbody>
 
