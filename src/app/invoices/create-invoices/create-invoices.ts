@@ -49,6 +49,7 @@ export class CreateInvoices implements OnInit {
       studentName: [''],
       className: [''],
       parentName: [''],
+      parentId:[''],
       invoiceItems: this.fb.array([]),
       remarks: ['']
     });
@@ -67,7 +68,8 @@ export class CreateInvoices implements OnInit {
           admissionNo: student.admissionNo,
           studentName: student.firstName + ' ' + student.lastName,
           className: student.className,
-          parentName: student.parentName // Assuming parentName is the parent's name; adjust as necessary
+          parentName: student.parentName ,// Assuming parentName is the parent's name; adjust as necessary
+          parentId: student.parentId
         });
       });
     }
