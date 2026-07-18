@@ -16,6 +16,7 @@ import { ViewStudent } from './student/view-student/view-student';
 import { CreateInvoices } from './invoices/create-invoices/create-invoices';
 import { ListInvoices } from './invoices/list-invoices/list-invoices';
 import { ViewInvoice } from './invoices/view-invoice/view-invoice';
+import { CreatePayment } from './payments/create-payment/create-payment';
 
 export const routes: Routes = [
     { path: 'home', component: Home ,canActivate: [authGuard]},
@@ -35,5 +36,6 @@ export const routes: Routes = [
     {path :'invoices/list', component: ListInvoices ,canActivate: [authGuard]},    
     {path :'invoices/list-invoice/:id', component: ViewInvoice ,canActivate: [authGuard]},    
     {path: 'invoices/create', component: CreateInvoices ,canActivate: [authGuard]},
+    {path:'payment/create/:id',component:CreatePayment,canActivate:[authGuard]},
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

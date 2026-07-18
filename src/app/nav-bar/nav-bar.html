@@ -119,6 +119,7 @@
       </li>
 
     </ul>
+
     <ul *ngIf="isParent">
       <!-- Students Menu -->
       <li class="nav-item">
@@ -170,6 +171,42 @@
                 Create Invoice
               </a>
               </li>
+
+              
+
+              
+           
+          </ul>
+        </div>
+      </li>
+
+      <!-- Payments Menu -->
+      <li class="nav-item">
+        <a
+          class="nav-link text-dark"
+          data-bs-toggle="collapse"
+          href="#paymentMenu"
+          role="button"
+        >
+          Paymenst ▼
+        </a>
+
+        <div class="collapse" id="paymentMenu">
+          <ul class="nav flex-column ms-3">
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="payment/list">
+                View Payments
+              </a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link text-dark" href="payment/create/27">
+                Create payment
+              </a>
+              </li>
+
+              
+
+              
            
           </ul>
         </div>
