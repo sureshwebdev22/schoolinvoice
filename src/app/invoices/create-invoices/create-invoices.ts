@@ -129,7 +129,7 @@ export class CreateInvoices implements OnInit {
 
   saveInvoice() {
 
-    console.log('input ' + JSON.stringify(this.invoiceForm.getRawValue()));
+    console.log('input :' + JSON.stringify(this.invoiceForm.getRawValue()));
     this.invoiceService.createInvoice(this.invoiceForm.getRawValue()).subscribe({
       next: (response: any) => {
         console.log('Invoice created successfully:', response);
