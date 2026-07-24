@@ -6,7 +6,7 @@
         </div>
 
         <div class="card-body">
-            <form [formGroup]="studentForm" >
+            <form [formGroup]="studentForm">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3 form-group">
@@ -94,9 +94,12 @@
 
                 </div>
 
+                <button *ngIf="isAdmin || isParent" class="btn btn-success" type="button"
+                    (click)="isAdmin ? addInvoice() : viewInvoice()">
 
-                <button class="btn btn-success" (click)="addInvoice()" >
-                    <i class="bi bi-pencil-square"></i> Add Invoice
+                    <i class="bi bi-pencil-square"></i>
+                    {{ isAdmin ? 'Add Invoice' : 'View Invoice' }}
+
                 </button>
 
 
@@ -108,4 +111,3 @@
 
         </div>
     </div>
-  

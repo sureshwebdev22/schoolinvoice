@@ -90,6 +90,7 @@ export class CreatePayment {
         next: (response: any) => {
 
           this.paymentHistory = response;
+          this.cdr.detectChanges();
 
         },
 

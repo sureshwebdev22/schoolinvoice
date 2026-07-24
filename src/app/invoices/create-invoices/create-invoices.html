@@ -183,10 +183,13 @@ Grand Total :
 <hr>
 
 <button
-class="btn btn-primary me-2"
-(click)="saveInvoice()">
+  *ngIf="isAdmin || isParent"
+  class="btn btn-success"
+  type="button"
+  (click)="isAdmin ? saveInvoice() : makePayment()">
 
-Save Invoice
+  <i class="bi bi-pencil-square"></i>
+  {{ isAdmin ? 'Add Invoice' : 'Make Payment' }}
 
 </button>
 

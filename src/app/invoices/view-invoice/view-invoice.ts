@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '../../services/invoice';
 import { CommonModule } from '@angular/common';
 import { disabled } from '@angular/forms/signals';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-view-invoice',
@@ -20,6 +21,7 @@ export class ViewInvoice {
 
   invoiceForm!: FormGroup;
   private cdr = inject(ChangeDetectorRef);
+  private authService = inject(Auth);
   feeTypes = [
     'Tuition Fee',
     'Bus Fee',
@@ -27,6 +29,9 @@ export class ViewInvoice {
     'Exam Fee',
     'Sports Fee'
   ];
+
+  isAdmin = false;
+  isParent = false;
 
   // Use a loose type here to avoid missing import for the invoice service
   constructor(private fb: FormBuilder, private route: ActivatedRoute
@@ -38,6 +43,11 @@ export class ViewInvoice {
   private router = inject(Router);
 
   ngOnInit(): void {
+
+     const role = this.authService.getRole();
+    console.log('User role:', role); // Log the role for debugging
+    this.isAdmin = role === 'ROLE_SCHOOL_ADMIN';
+    this.isParent = role === 'ROLE_PARENT';
 
     this.invoiceForm = this.fb.group({
       invoiceNumber: [''],
@@ -115,6 +125,10 @@ export class ViewInvoice {
 
   createInvoice() {
     this.router.navigateByUrl('/invoices/create');
+
+  }
+  makePayment(){
+        this.router.navigateByUrl('payment/create/'+Number(this.route.snapshot.paramMap.get('id')));
 
   }
   cancelInvoice() {

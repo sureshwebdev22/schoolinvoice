@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentServices } from '../../services/student-services';
 import { Invoice } from '../../services/invoice';
 import { Alertservice } from '../../services/alertservice';
+import { Auth } from '../../services/auth';
 import { ModalStudentSearch } from '../../student/modal-student-search/modal-student-search';
 
 
@@ -18,6 +19,10 @@ import { ModalStudentSearch } from '../../student/modal-student-search/modal-stu
 })
 export class CreateInvoices implements OnInit {
 
+ isAdmin = false;
+  isParent = false;
+
+  private authService =inject(Auth);
 
 
   invoiceForm!: FormGroup;
@@ -31,7 +36,7 @@ export class CreateInvoices implements OnInit {
   ];
 
   // Use a loose type here to avoid missing import for the invoice service
-  constructor(private fb: FormBuilder, private route: ActivatedRoute
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router
   ) { }
 
   private studentService = inject(StudentServices);
@@ -39,6 +44,10 @@ export class CreateInvoices implements OnInit {
   private alertService = inject(Alertservice);
 
   ngOnInit(): void {
+     const role = this.authService.getRole();
+    console.log('User role:', role); // Log the role for debugging
+    this.isAdmin = role === 'ROLE_SCHOOL_ADMIN';
+    this.isParent = role === 'ROLE_PARENT';
 
     this.invoiceForm = this.fb.group({
       invoiceNumber: [''],
@@ -184,4 +193,8 @@ export class CreateInvoices implements OnInit {
   }); */
 
 }
+
+makePayment()
+{
+  this.router.navigate(['/payment/create/', this.route.snapshot.paramMap.get('id')]);}
 }

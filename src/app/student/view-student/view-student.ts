@@ -5,6 +5,7 @@ import { StudentServices } from '../../services/student-services';
 import id from '@angular/common/locales/extra/id';
 import { CommonModule, DatePipe } from '@angular/common';
 import { disabled } from '@angular/forms/signals';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-view-student',
@@ -14,6 +15,20 @@ import { disabled } from '@angular/forms/signals';
   styleUrls: ['./view-student.css'],
 })
 export class ViewStudent {
+
+  isAdmin = false;
+  isParent = false;
+
+  private authService =inject(Auth);
+
+   ngOnInit() {
+
+    const role = this.authService.getRole();
+    console.log('User role:', role); // Log the role for debugging
+    this.isAdmin = role === 'ROLE_SCHOOL_ADMIN';
+    this.isParent = role === 'ROLE_PARENT';
+  }
+
 
  studentForm: FormGroup;
  
@@ -69,6 +84,13 @@ export class ViewStudent {
     
     this.router.navigate(['/invoices/create', this.route.snapshot.paramMap.get('id')]);
     //this.router.navigate(['/invoices/create'], { queryParams: { id } });
+  }
+
+  viewInvoice():void{
+      console.log('id  ' +this.route.snapshot.paramMap.get('id'));
+
+        this.router.navigate(['/invoices/list-invoice/', this.route.snapshot.paramMap.get('id')]);
+
   }
 
 }
