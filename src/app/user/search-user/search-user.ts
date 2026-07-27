@@ -60,21 +60,31 @@ export class SearchUser {
           this.size,
           this.userSearchForm.value.searchText
         )
-        .subscribe((res: any) => {
-          if (res && typeof res === 'object') {
-            //     this.cdr.detectChanges();
-            this.loading = false;
-            this.users = [];
-            this.users = (res as any).content;
-            this.cdr.detectChanges();
-            this.totalPages = (res as any).totalPages;
-            this.totalElements = (res as any).totalElements;
-            console.log('Users:', this.users.length);
-             /* if (this.users.length === 0) {
-                         
+        .subscribe({
+          next: (res: any) => {
+            if (res && typeof res === 'object') {
+              //     this.cdr.detectChanges();
+              this.loading = false;
+              this.users = [];
+              this.users = (res as any).content;
+              this.cdr.detectChanges();
+              this.totalPages = (res as any).totalPages;
+              this.totalElements = (res as any).totalElements;
+              console.log('Users:', this.users.length);
+               /* if (this.users.length === 0) {
+                           
 
-              this.alertService.warning('No Users found');
-            } */
+                this.alertService.warning('No Users found');
+              } */
+            }
+          },
+          error: (err:any) => {
+             this.loading = false;
+              this.users = [];
+              this.cdr.detectChanges();
+              this.alertService.error(err.error.message);
+              
+
           }
         });
     });
