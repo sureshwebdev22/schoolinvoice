@@ -11,7 +11,7 @@ import { timer } from 'rxjs/internal/observable/timer';
   selector: 'app-list-invoices',
   imports: [ReactiveFormsModule , CommonModule],
   templateUrl: './list-invoices.html',
-  styleUrl: './list-invoices.css',
+  styleUrls: ['./list-invoices.css'],
 })
 export class ListInvoices {
   
@@ -59,24 +59,29 @@ export class ListInvoices {
           this.page,
           this.size
         )
-        .subscribe((res: any) => {
-          if (res && typeof res === 'object') {
-            //     this.cdr.detectChanges();
+        .subscribe({
+          next: (res: any) => {
+            if (res && typeof res === 'object') {
+              this.loading = false;
+              this.invoices = [];
+              this.invoices = (res as any).content;
+              console.log('Invoices:', this.invoices);
+              this.cdr.detectChanges();
+              this.totalPages = (res as any).totalPages;
+              this.totalElements = (res as any).totalElements;
+              console.log('Invoices:', this.invoices.length);
+            }
+          },
+          error: (err: any) => {
             this.loading = false;
             this.invoices = [];
-            this.invoices = (res as any).content;
-            console.log('Invoices:', this.invoices);
             this.cdr.detectChanges();
-            this.totalPages = (res as any).totalPages;
-            this.totalElements = (res as any).totalElements;
-            console.log('Invoices:', this.invoices.length);
-             /* if (this.invoices.length === 0) {
-                         
+            this.alertService.error(err.error.message);
 
-              this.alertService.warning('No invoices found');
-            } */
+            console.error('Failed to load invoices', err);
           }
         });
+      
     });
   }
 
