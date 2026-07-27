@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 export class Payments {
 
   // private apiUrl = 'http://localhost:8080/api/payments';
-   private apiUrl = environment.apiUrl +'/payments';
+   private apiUrl = environment.apiUrl+'/payments';
 
   constructor(private http: HttpClient) { }
 

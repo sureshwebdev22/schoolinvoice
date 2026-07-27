@@ -2,7 +2,6 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentServices } from '../services/student-services';
 import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Alertservice } from '../services/alertservice';
@@ -53,38 +52,56 @@ export class Students implements OnInit {
   loading = false;
 
   loadStudents() {
+    this.cdr.detectChanges();
     this.loading = true;
-    timer(500).subscribe(() => {
+    //timer(100).subscribe(() => {
       this.studentService
         .getStudents(
           this.page,
           this.size,
           this.studentSearchForm.value.searchText
         )
-        .subscribe((res: any) => {
-          if (res && typeof res === 'object') {
-            //     this.cdr.detectChanges();
+        .subscribe({
+          next: (res: any) => {
+            if (res && typeof res === 'object') {
+              //     this.cdr.detectChanges();
+              this.loading = false;
+              this.students = [];
+              this.students = (res as any).content;
+              this.cdr.detectChanges();
+              this.totalPages = (res as any).totalPages;
+              this.totalElements = (res as any).totalElements;
+              console.log('Students:', this.students.length);
+               /* if (this.students.length === 0) {
+                           
+
+                this.alertService.warning('No students found');
+              } */
+            }
+          },
+          error: (err:any) => {
+      //      console.error('err'+ err);
+            console.log('err '+ err)
+              //this.students = [];
+
             this.loading = false;
             this.students = [];
-            this.students = (res as any).content;
-            this.cdr.detectChanges();
-            this.totalPages = (res as any).totalPages;
-            this.totalElements = (res as any).totalElements;
-            console.log('Students:', this.students.length);
-             /* if (this.students.length === 0) {
-                         
 
-              this.alertService.warning('No students found');
-            } */
+            this.cdr.detectChanges();
+
+            this.alertService.error(err.error.message);
+
+
           }
         });
-    });
+   // });
   }
 
   searchStudents() {
     // this.students = [];
     this.page = 0;
     this.loadStudents();
+    //this.cdr.detectChanges();
   }
 
   studentcreate() {

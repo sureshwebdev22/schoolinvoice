@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Alertservice } from '../../services/alertservice';
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +18,7 @@ export class Alert {
 
   constructor(
 
-      private alertService: Alertservice
+      private alertService: Alertservice, private cdr: ChangeDetectorRef
 
   ) {}
 
@@ -29,6 +29,7 @@ export class Alert {
       .subscribe(alert => {
 
         this.alert = alert;
+        this.cdr.detectChanges();
 
         if (this.timer) {
 

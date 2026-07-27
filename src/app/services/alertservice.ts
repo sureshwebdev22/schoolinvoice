@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectorRef, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export interface Alert {
