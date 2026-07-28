@@ -19,7 +19,7 @@ import { ModalStudentSearch } from '../../student/modal-student-search/modal-stu
 })
 export class CreateInvoices implements OnInit {
 
- isAdmin = false;
+  isAdmin = false;
   isParent = false;
 
   private authService =inject(Auth);
