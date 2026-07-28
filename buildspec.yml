@@ -9,7 +9,7 @@ phases:
 
   build:
     commands:
-      - npm build 
+      - npm run build 
 
 artifacts:
   base-directory: dist/schoolinvoice/browser
