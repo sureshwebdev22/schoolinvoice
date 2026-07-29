@@ -9,11 +9,16 @@ phases:
 
   build:
     commands:
-      - npm run build 
+      - npm run build
+
+  post_build:
+    commands:
+      - mkdir deploy
+      - cp appspec.yml deploy/
+      - cp -r scripts deploy/
+      - cp -r dist/schoolinvoice/browser/* deploy/
 
 artifacts:
-  base-directory: dist/schoolinvoice/browser
+  base-directory: deploy
   files:
     - '**/*'
-    - appspec.yml
-    - scripts/**/*
