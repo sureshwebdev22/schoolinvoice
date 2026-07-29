@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Parent } from './../models/parent';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParentService {
 
-  private apiUrl = 'http://localhost:8080/api/schooladmin/parents';
+  private apiUrl = environment.apiUrl+'/schooladmin/parents';
 
   constructor(private http: HttpClient) {}
 
