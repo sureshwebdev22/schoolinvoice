@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mkdir -p /usr/share/nginx/html
-rm -rf /usr/share/nginx/html/*
+echo "Starting BeforeInstall..."
+#sudo rm -rf /usr/share/nginx/html/*

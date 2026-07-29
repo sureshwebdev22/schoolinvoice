@@ -1,3 +1,3 @@
 #!/bin/bash
 
-systemctl stop nginx || true
+sudo systemctl stop nginx || true

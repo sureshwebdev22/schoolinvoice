@@ -1,4 +1,4 @@
 #!/bin/bash
 
-systemctl enable nginx
-systemctl restart nginx
+sudo systemctl enable nginx
+sudo systemctl restart nginx

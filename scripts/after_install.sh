@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cp -r /home/ec2-user/angular/* /usr/share/nginx/html/
+sudo cp -r /home/ec2-user/angular/* /usr/share/nginx/html/
