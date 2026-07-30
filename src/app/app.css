@@ -36,7 +36,7 @@ flex:1;
 
 overflow:auto;
 
-background:#f8f9fa;
+background:hsl(220, 33%, 98%);
 
 }
 
@@ -48,7 +48,7 @@ padding:12px 20px;
 
 .nav-link:hover{
 
-background:#0d6efd;
+background:#4b0516;
 
 }
 
