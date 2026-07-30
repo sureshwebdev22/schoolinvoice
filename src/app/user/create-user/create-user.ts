@@ -1,16 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+
 import { Alertservice } from '../../services/alertservice';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-create-user',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './create-user.html',
-  styleUrls: ['./create-user.css'],
+  styleUrls: ['./create-user.css']
 })
 export class CreateUser {
 
@@ -21,39 +30,134 @@ export class CreateUser {
   private router = inject(Router);
 
   constructor(private fb: FormBuilder) {
+
     this.userForm = this.fb.group({
-      
-      email: [''],
-      password: [''],
-      fullName: [''],
-      dateOfBirth: [''],
-      gender: [''],
-      mobileNo: [''],
-      role: [''],
-      address: [''],
-      
+
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20)
+        ]
+      ],
+
+      fullName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100)
+        ]
+      ],
+
+      dateOfBirth: [
+        '',
+        Validators.required
+      ],
+
+      gender: [
+        '',
+        Validators.required
+      ],
+
+      mobileNo: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]{10}$')
+        ]
+      ],
+
+      role: [
+        '',
+        Validators.required
+      ],
+
+      address: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(255)
+        ]
+      ]
+
     });
+
   }
 
+  /**
+   * Shortcut for accessing form controls
+   */
+  get f() {
+    return this.userForm.controls;
+  }
+
+  /**
+   * Create User
+   */
   createUser(): void {
 
-    this.userService.createUser(this.userForm.value)
+    if (this.userForm.invalid) {
+
+      this.userForm.markAllAsTouched();
+
+      this.alertService.error(
+        'Please fill all required fields correctly.'
+      );
+
+      return;
+    }
+
+    this.userService
+      .createUser(this.userForm.value)
       .subscribe({
+
         next: (data: any) => {
-          console.log('User created successfully:', data);
-          this.alertService.success( data.role + ' ' + data.fullName + ' created successfully!');
-                    this.router.navigate(['/user/search']); // Navigate to the user search page after successful creation']);
 
-          // You can navigate to another page or show a success message here
+          console.log('User created successfully', data);
+
+          this.alertService.success(
+            `${data.role} ${data.fullName} created successfully!`
+          );
+
+          this.userForm.reset();
+
+          this.router.navigate(['/user/search']);
+
         },
-        error: (err: any) => {
-          console.error('Error creating user:', err);
-          this.alertService.error(err.message || 'Error creating user.');
-          // Handle the error, show an error message, etc.
-        }
-      });
-    // Implement the logic to create a user using the userForm data
-    console.log('Creating user with data:', this.userForm.value);
-  }
-}
 
+        error: (err: any) => {
+
+          console.error(err);
+
+          this.alertService.error(
+            err?.error?.message ||
+            err?.message ||
+            'Error creating user.'
+          );
+
+        }
+
+      });
+
+  }
+
+  /**
+   * Reset Form
+   */
+  resetForm(): void {
+
+    this.userForm.reset();
+
+  }
+
+}
