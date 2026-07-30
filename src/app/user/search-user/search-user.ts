@@ -94,6 +94,7 @@ export class SearchUser {
     // this.users = [];
     this.page = 0;
     this.loadUsers();
+    this.loading =false;
   }
 
   usercreate() {

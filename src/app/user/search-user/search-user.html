@@ -16,8 +16,8 @@
             <form [formGroup]="userSearchForm">
 
                 <div class="row g-3 align-items-end mb-4">
-
-                    <div class="col-12 col-lg-3">
+                    
+                    <div class="col-12 col-lg-2">
                         <button
                             type="button"
                             class="btn btn-success w-100"
@@ -28,8 +28,10 @@
 
                         </button>
                     </div>
+                    <div class="col-12 col-lg-4">
+                        </div>
 
-                    <div class="col-12 col-lg-7">
+                    <div class="col-12 col-lg-4">
 
                         <input
                             type="text"
@@ -52,6 +54,7 @@
                         </button>
 
                     </div>
+                  
 
                 </div>
 
@@ -175,7 +178,6 @@
 
                 <button
                     class="btn btn-secondary"
-                    [disabled]="page+1>=totalPages"
                     (click)="nextPage()">
 
                     Next
