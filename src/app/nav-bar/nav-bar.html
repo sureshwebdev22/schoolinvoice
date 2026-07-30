@@ -1,218 +1,225 @@
+<div
+class="offcanvas-lg offcanvas-start sidebar bg-light"
+tabindex="-1"
+id="sidebar">
 
-    <div class="d-flex">
-  
-  <!-- Sidebar -->
-  <div class="bg-light text-dark p-3" style="width: 250px; min-height: 100vh;">
-    <h4>School Admin</h4>
+<div class="offcanvas-header">
 
-    <ul class="nav flex-column" *ngIf="isAdmin">
+<h5>Menu</h5>
 
-      
+<button
+class="btn-close btn-close-white"
+data-bs-dismiss="offcanvas">
+</button>
 
-      <!-- Students Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link text-dark"
-          data-bs-toggle="collapse"
-          href="#studentMenu"
-          role="button"
-        >
-          Students ▼
-        </a>
+</div>
 
-        <div class="collapse" id="studentMenu">
-          <ul class="nav flex-column ms-3">
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="/students">
-                Search Student
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="student/create">
-                Create Student
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
+<div class="offcanvas-body p-0">
 
-      <!-- Parent Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link text-dark"
-          data-bs-toggle="collapse"
-          href="#parentMenu"
-          role="button"
-        >
-          Parents ▼
-        </a>
+<ul class="nav flex-column">
 
-        <div class="collapse" id="parentMenu">
-          <ul class="nav flex-column ms-3">
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="parent/search">
-                Search Parent
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="parent/create">
-                Create Parent
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
+<li class="nav-item">
+<a routerLink="/dashboard" class="nav-link">
+<i class="bi bi-speedometer2"></i>
+Dashboard
+</a>
+</li>
 
-      <!-- User Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link text-dark"
-          data-bs-toggle="collapse"
-          href="#userMenu"
-          role="button"
-        >
-          Users ▼
-        </a>
+<li class="nav-item">
 
-        <div class="collapse" id="userMenu">
-          <ul class="nav flex-column ms-3">
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="user/search">
-                User List
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="user/create">
-                Create User
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
+<a
+class="nav-link text-blue"
+data-bs-toggle="collapse"
+href="#users">
 
-       <!-- Invoices Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link text-dark"
-          data-bs-toggle="collapse"
-          href="#invoiceMenu"
-          role="button"
-        >
-          Invoices ▼
-        </a>
+<i class="bi bi-people"></i>
 
-        <div class="collapse" id="invoiceMenu">
-          <ul class="nav flex-column ms-3">
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="invoices/list">
-                View Invoices
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="invoices/create">
-                Create Invoice
-              </a>
-              </li>
-           
-          </ul>
-        </div>
-      </li>
+Parent User
 
-    </ul>
+</a>
 
-    <ul *ngIf="isParent">
-      <!-- Students Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link text-dark"
-          data-bs-toggle="collapse"
-          href="#studentMenu"
-          role="button"
-        >
-          Students ▼
-        </a>
+<div class="collapse" id="users">
 
-        <div class="collapse" id="studentMenu">
-          <ul class="nav flex-column ms-3">
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="/students">
-                Search Student
-              </a>
-            </li>
-            <li class="nav-item" *ngIf="isAdmin">
-              <a class="nav-link text-dark" href="student/create">
-                Create Student
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
+<ul class="nav flex-column ms-4">
 
-      <!-- Invoices Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link text-dark"
-          data-bs-toggle="collapse"
-          href="#invoiceMenu"
-          role="button"
-        >
-          Invoices ▼
-        </a>
+<li>
 
-        <div class="collapse" id="invoiceMenu">
-          <ul class="nav flex-column ms-3">
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="invoices/list">
-                View Invoices
-              </a>
-            </li>
-            <li class="nav-item" *ngIf="isAdmin">
-              <a class="nav-link text-dark" href="invoices/create">
-                Create Invoice
-              </a>
-              </li>
+<a
+href="user/search"
+class="nav-link text-blue">
 
-              
+Search User
 
-              
-           
-          </ul>
-        </div>
-      </li>
+</a>
 
-      <!-- Payments Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link text-dark"
-          data-bs-toggle="collapse"
-          href="#paymentMenu"
-          role="button"
-        >
-          Payments▼
-        </a>
+</li>
 
-        <div class="collapse" id="paymentMenu">
-          <ul class="nav flex-column ms-3">
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="payment/list">
-                View Payments
-              </a>
-            </li>
-            <li class="nav-item" >
-              <a class="nav-link text-dark" href="payment/create/27">
-                Create payment
-              </a>
-              </li>
+<li>
 
-              
+<a
+href="user/create"
+class="nav-link text-blue">
 
-              
-           
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
+Create User
 
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</li>
+
+<li class="nav-item">
+
+<a
+class="nav-link text-blue"
+data-bs-toggle="collapse"
+href="#student">
+
+<i class="bi bi-mortarboard"></i>
+
+Students
+
+</a>
+
+<div class="collapse" id="student">
+
+<ul class="nav flex-column ms-4">
+
+<li>
+
+<a
+href="/students"
+class="nav-link text-blue">
+
+Search Student
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="student/create"
+class="nav-link text-blue">
+
+Create Student
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</li>
+
+
+<li class="nav-item">
+
+<a
+class="nav-link text-blue"
+data-bs-toggle="collapse"
+href="#invoice">
+
+<i class="bi bi-receipt"></i>
+
+Invoices
+
+</a>
+
+<div class="collapse" id="invoice">
+
+<ul class="nav flex-column ms-4">
+
+<li>
+
+<a
+href="invoices/list"
+class="nav-link text-blue">
+
+Search Invoices
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="invoices/create"
+class="nav-link text-blue">
+
+Create Invoices
+
+</a>
+
+</li>
+
+
+
+</ul>
+
+</div>
+
+</li>
+
+<li class="nav-item">
+
+<a
+class="nav-link text-blue"
+data-bs-toggle="collapse"
+href="#payments">
+
+<i class="bi bi-cash"></i>
+
+Payments
+
+</a>
+
+<div class="collapse" id="payments">
+
+<ul class="nav flex-column ms-4">
+
+<li>
+
+<a
+href="payment/list"
+class="nav-link text-blue">
+
+Search Payments
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="payment/create/27"
+class="nav-link text-blue">
+
+Create Payment
+
+</a>
+
+</li>
+
+
+
+</ul>
+
+</div>
+
+</li>
+
+</ul>
+
+</div>
 
 </div>

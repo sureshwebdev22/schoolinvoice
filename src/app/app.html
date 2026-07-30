@@ -1,39 +1,28 @@
-<div class="container-fluid vh-100 p-0">
+<div class="wrapper">
 
-  <!-- Header -->
-  <div class="row g-0">
-    <div class="col mb-0">
+    <!-- Header -->
+    <app-header></app-header>
 
-      <app-header></app-header>
-    </div>
-  </div>
+    <div class="main-container">
 
-  <!-- Main Content -->
-  <div class="row mt-0 p-0" style="min-height:80vh;">
+        <!-- Sidebar -->
+         <div *ngIf="isLoggedIn()">
+        <app-nav-bar></app-nav-bar>
+        </div>
 
-    <!-- Sidebar -->
+        <!-- Content -->
+        <main class="content">
 
-    <div class="col-md-2 bg-light ">
-      <div *ngIf="isLoggedIn()">
-      <app-nav-bar></app-nav-bar>
-      </div>
+            <div class="container-fluid p-3">
+                 <app-alert ></app-alert> 
+                <router-outlet></router-outlet>
+            </div>
 
-    </div>
+        </main>
 
-    <!-- Content -->
-    <div class="col-md-10 ">
-      <!--<app-alert class="m-3"></app-alert> -->
-      <app-alert class="m-3"></app-alert> 
-      <router-outlet></router-outlet>
     </div>
 
-  </div>
-
-  <!-- Footer -->
-  <div class="row mt-0 bg-secondary text-white ">
-    <div class="col text-center">
-      <app-footer></app-footer>
-    </div>
-  </div>
+    <!-- Footer -->
+    <app-footer></app-footer>
 
 </div>
