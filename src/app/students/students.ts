@@ -18,11 +18,11 @@ import { timer } from 'rxjs';
 })
 export class Students implements OnInit {
   //
-
+    loading = false;
   students: any[] = [];
 
   ngOnInit(): void {
-
+    this.loading = false;
     }
 
 
@@ -50,7 +50,7 @@ export class Students implements OnInit {
 
   totalElements = 0;
 
-  loading = false;
+
 
   loadStudents() {
     this.cdr.detectChanges();
@@ -100,9 +100,11 @@ export class Students implements OnInit {
 
   searchStudents() {
     // this.students = [];
+    
     this.page = 0;
     this.loadStudents();
-    //this.cdr.detectChanges();
+    this.loading =false;
+    this.cdr.detectChanges();
   }
 
   studentcreate() {

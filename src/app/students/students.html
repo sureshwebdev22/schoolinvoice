@@ -1,87 +1,142 @@
 <form [formGroup]="studentSearchForm">
-  <div class="row mb-3 mt-3 align-items-center">
-    <div class="col-md-6">
-      <button class="btn btn-success" (click)="studentcreate()">
-        <i class="bi bi-plus-circle"></i> Create Student
-      </button>
+
+    <div class="row g-3 align-items-end my-3">
+
+        <!-- Create Button -->
+        <div class="col-12 col-lg-3">
+            <button
+                type="button"
+                class="btn btn-success w-100"
+                (click)="studentcreate()">
+                <i class="bi bi-plus-circle"></i>
+                Create Student
+            </button>
+        </div>
+
+        <!-- Search Box -->
+        <div class="col-12 col-lg-7">
+            <input
+                type="text"
+                class="form-control"
+                formControlName="searchText"
+                placeholder="Search by Admission No, Name, Class...">
+        </div>
+
+        <!-- Search Button -->
+        <div class="col-12 col-lg-2">
+            <button
+                type="button"
+                class="btn btn-primary w-100"
+                (click)="searchStudents()">
+                <i class="bi bi-search"></i>
+                Search
+            </button>
+        </div>
+
     </div>
 
-    <div class="col-md-4">
-      <input type="text" class="form-control" formControlName="searchText" placeholder="Search Student">
-    </div>
-
-    <div class="col-md-2">
-      <button class="btn btn-primary" (click)="searchStudents()">
-        Search
-      </button>
-    </div>
-
-  </div>
 </form>
 
-<div *ngIf="loading" class="text-center my-3">
-  <div class="spinner-border text-primary" role="status"></div>
-  <p class="mt-2">Loading...</p>
+<div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary"></div>
+    <div class="mt-2">
+        Loading Students...
+    </div>
 </div>
 
-<table *ngIf="!loading" class="table table-striped mb-3">
 
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Admission No</th>
-      <th>Name</th>
-      <th>Class</th>
-      <th>Section</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
+<div class="table-responsive" *ngIf="!loading">
 
-  <tbody>
-    <tr *ngFor="let s of students">
+<table class="table table-hover table-bordered align-middle">
 
-      <td>{{s.studentId}}</td>
-      <td>{{s.admissionNo}}</td>
-      <td>{{s.firstName}} {{s.lastName}}</td>
-      <td>{{s.className}}</td>
-      <td>{{s.sectionName}}</td>
-      <td>{{s.status}}</td>
-      <td class="text-nowrap">
-        <button class="btn btn-sm btn-outline-primary me-1" title="View" (click)="viewStudent(s.studentId)">
-          <i class="bi bi-eye"></i>
-        </button>
+    <thead class="table-primary">
+        <tr>
+            <th>ID</th>
+            <th>Admission No</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Section</th>
+            <th>Status</th>
+            <th width="180">Actions</th>
+        </tr>
+    </thead>
 
-        <button class="btn btn-sm btn-outline-success me-1" title="Add">
-          <i class="bi bi-plus-circle"></i>
-        </button>
+    <tbody>
 
-        <button class="btn btn-sm btn-outline-warning me-1" title="Edit" (click)="editStudent(s.studentId)">
-          <i class="bi bi-pencil-square"></i>
-        </button>
+        <tr *ngFor="let s of students">
 
-       <button class="btn btn-sm btn-outline-danger" title="Delete" (click)="deleteStudent(s.studentId)">
-  <i class="bi bi-trash3"></i>
-</button>
-      </td>
+            <td>{{s.studentId}}</td>
+            <td>{{s.admissionNo}}</td>
+            <td>{{s.firstName}} {{s.lastName}}</td>
+            <td>{{s.className}}</td>
+            <td>{{s.sectionName}}</td>
+            <td>
+                <span
+                    class="badge"
+                    [ngClass]="{
+                        'bg-success': s.status=='ACTIVE',
+                        'bg-danger': s.status=='INACTIVE'
+                    }">
+                    {{s.status}}
+                </span>
+            </td>
 
-    </tr>
-  </tbody>
+            <td class="text-nowrap">
+
+                <button
+                    class="btn btn-sm btn-outline-primary me-1"
+                    (click)="viewStudent(s.studentId)">
+                    <i class="bi bi-eye"></i>
+                </button>
+
+                <button
+                    class="btn btn-sm btn-outline-success me-1">
+                    <i class="bi bi-plus-circle"></i>
+                </button>
+
+                <button
+                    class="btn btn-sm btn-outline-warning me-1"
+                    (click)="editStudent(s.studentId)">
+                    <i class="bi bi-pencil"></i>
+                </button>
+
+                <button
+                    class="btn btn-sm btn-outline-danger"
+                    (click)="deleteStudent(s.studentId)">
+                    <i class="bi bi-trash"></i>
+                </button>
+
+            </td>
+
+        </tr>
+
+    </tbody>
 
 </table>
 
-<div class="d-flex justify-content-between">
+</div>
 
-  <button class="btn btn-secondary" (click)="previousPage()">
-    Previous
-  </button>
 
-  <span>
-    Page {{page + 1}} of {{totalPages}}
-  </span>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-3">
 
-  <button class="btn btn-secondary" (click)="nextPage()">
-    Next
-  </button>
+    <button
+        class="btn btn-secondary mb-2 mb-md-0"
+        [disabled]="page==0"
+        (click)="previousPage()">
+        <i class="bi bi-arrow-left"></i>
+        Previous
+    </button>
+
+    <span class="fw-bold mb-2 mb-md-0">
+        Page {{page+1}} of {{totalPages}}
+    </span>
+
+    <button
+        class="btn btn-secondary"
+        [disabled]="page+1>=totalPages"
+        (click)="nextPage()">
+        Next
+        <i class="bi bi-arrow-right"></i>
+    </button>
 
 </div>

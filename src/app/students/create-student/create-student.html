@@ -1,115 +1,150 @@
-<div class="container mt-4">
-    <div class="card ">
-        <div class="card-header">
-            <h3>Create Student</h3>
-        </div>
+<div class="container py-4">
 
-        <div class="card-body">
-            <form [formGroup]="studentForm" (ngSubmit)="createStudent()">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3 form-group">
-                            <label class="form-label">Admission No</label>
-                            <input type="text" class="form-control" formControlName="admissionNo">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3 form-group">
-                            <label class="form-label">First Name</label>
-                            <input type="text" class="form-control" formControlName="firstName">
-                        </div>
-                    </div>
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-10">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-plus-fill"></i>
+                        Create Student
+                    </h4>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3 form-group">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control" formControlName="lastName">
-                        </div>
-                    </div>
+                <div class="card-body">
 
-                    <div class="col-md-6">
-                        <div class="mb-3 form-group">
-                            <label class="form-label">Gender</label>
-                            <select class="form-select" formControlName="gender">
-                                <option value="M">Male</option>
-                                <option value="F">Female</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3 form-group">
-                            <label class="form-label">Class</label>
-                            <input type="text" class="form-control" formControlName="className">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3 form-group">
-                            <label class="form-label">Section</label>
-                            <input type="text" class="form-control" formControlName="sectionName">
-                        </div>
-                    </div>
-                </div>
+                    <form [formGroup]="studentForm" (ngSubmit)="createStudent()">
 
-                <div class="row">
-                    <div class="col-md-6">
+                        <div class="row g-3">
 
-                        <div class="mb-3 form-group">
-                            <label class="form-label">Status</label>
-                            <!--        <input type="text" class="form-control" formControlName="status"> -->
-                            <select id="status" class="form-select" formControlName="status">
-
-                                <option value="">-- Select Status --</option>
-                                <option value="ACTIVE">Active</option>
-                                <option value="INACTIVE">Inactive</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3 form-group">
-                                    <label class="form-label">Parent Name</label>
-                                    <input type="text" class="form-control" formControlName="parentName">
-                                    <input type="hidden" class="form-control" formControlName="parentId">
-
-                                </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Admission No</label>
+                                <input type="text"
+                                       class="form-control"
+                                       formControlName="admissionNo">
                             </div>
 
-                            <div class="col-md-6 d-flex align-items-end p-0 ">
-                                <div class="mb-3 form-group"> <button type="button" class="btn btn-primary"
-                                        data-bs-toggle="modal" data-bs-target="#parentSearchModal">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text"
+                                       class="form-control"
+                                       formControlName="firstName">
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text"
+                                       class="form-control"
+                                       formControlName="lastName">
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Gender</label>
+
+                                <select class="form-select"
+                                        formControlName="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Class</label>
+                                <input type="text"
+                                       class="form-control"
+                                       formControlName="className">
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Section</label>
+                                <input type="text"
+                                       class="form-control"
+                                       formControlName="sectionName">
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Status</label>
+
+                                <select class="form-select"
+                                        formControlName="status">
+                                    <option value="">Select Status</option>
+                                    <option value="ACTIVE">Active</option>
+                                    <option value="INACTIVE">Inactive</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">Parent</label>
+
+                                <div class="input-group">
+
+                                    <input type="text"
+                                           class="form-control"
+                                           formControlName="parentName"
+                                           readonly>
+
+                                    <input type="hidden"
+                                           formControlName="parentId">
+
+                                    <button
+                                        class="btn btn-outline-primary"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#parentSearchModal">
 
                                         <i class="bi bi-search"></i>
 
                                     </button>
+
                                 </div>
+
                             </div>
 
                         </div>
-                    </div>
+
+                        <hr>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                            <button
+                                type="submit"
+                                class="btn btn-success">
+
+                                <i class="bi bi-check-circle"></i>
+
+                                Create
+
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                routerLink="/students">
+
+                                <i class="bi bi-x-circle"></i>
+
+                                Cancel
+
+                            </button>
+
+                        </div>
+
+                    </form>
 
                 </div>
 
-
-                <button class="btn btn-success" type="submit">
-                    <i class="bi bi-pencil-square"></i> Create
-                </button>
-
-
-                <button class="btn btn-secondary ms-2" routerLink="/students">
-                    Cancel
-                </button>
-
-            </form>
+            </div>
 
         </div>
-    </div>
+
     </div>
 
+</div>
 
-<app-search-parent (parentSelected)="onParentSelected($event)">
+<app-search-parent
+    (parentSelected)="onParentSelected($event)">
 </app-search-parent>

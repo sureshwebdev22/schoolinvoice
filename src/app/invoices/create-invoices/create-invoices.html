@@ -1,209 +1,301 @@
-<div class="container mt-4">
+<div class="container-fluid py-4">
 
-<div class="card shadow">
+    <div class="row justify-content-center">
 
-<div class="card-header bg-secondary text-white">
-<h5>Create Student Invoice</h5>
-</div>
+        <div class="col-12 col-xl-10">
 
-<div class="card-body" [formGroup]="invoiceForm">
+            <div class="card shadow-lg">
 
-<div class="row mb-3">
+                <!-- Header -->
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-receipt"></i>
+                        Create Student Invoice
+                    </h4>
+                </div>
 
-<div class="col-md-4">
-<label>Invoice No</label>
-<input class="form-control"
-formControlName="invoiceNumber">
-</div>
+                <!-- Body -->
+                <div class="card-body">
 
-<div class="col-md-4">
-<label>Invoice Date</label>
-<input type="date"
-class="form-control"
-formControlName="invoiceDate">
-</div>
+                    <form [formGroup]="invoiceForm">
 
-<div class="col-md-4">
-<label>Due Date</label>
-<input type="date"
-class="form-control"
-formControlName="dueDate">
-</div>
+                        <!-- Invoice Details -->
+                        <h5 class="text-primary mb-3">Invoice Details</h5>
 
-</div>
+                        <div class="row g-3">
 
-<hr>
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Invoice No</label>
+                                <input
+                                    class="form-control"
+                                    formControlName="invoiceNumber">
+                            </div>
 
-<h5>Student Details</h5>
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Invoice Date</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    formControlName="invoiceDate">
+                            </div>
 
-<div class="row">
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Due Date</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    formControlName="dueDate">
+                            </div>
 
-<div class="col-md-3">
-<label>Admission No</label>
-<input class="form-control"
-formControlName="admissionNo">
-</div>
+                        </div>
 
-<div class="col-md-3">
-<label>Student Name</label>
-<input class="form-control"
-formControlName="studentName">
-</div>
+                        <hr>
 
-<div class="col-md-3">
-<label>Class Name</label>
-<input class="form-control"
-formControlName="className">
-</div>
+                        <!-- Student Details -->
+                        <h5 class="text-primary mb-3">Student Details</h5>
 
-<div class="col-md-2">
-<label>Parent</label>
-<input class="form-control"
-formControlName="parentName">
-<input type="hidden" class="form-control"
-formControlName="parentId">
-</div>
-<div class="col-md-1">
-<div class="mb-3 form-group"> <button type="button" class="btn btn-primary"
-                                        data-bs-toggle="modal" data-bs-target="#studentSearchModal">
+                        <div class="row g-3">
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Admission No</label>
+                                <input
+                                    class="form-control"
+                                    formControlName="admissionNo">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Student Name</label>
+                                <input
+                                    class="form-control"
+                                    formControlName="studentName">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Class</label>
+                                <input
+                                    class="form-control"
+                                    formControlName="className">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+
+                                <label class="form-label">Parent</label>
+
+                                <div class="input-group">
+
+                                    <input
+                                        class="form-control"
+                                        formControlName="parentName"
+                                        readonly>
+
+                                    <input
+                                        type="hidden"
+                                        formControlName="parentId">
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#studentSearchModal">
 
                                         <i class="bi bi-search"></i>
 
                                     </button>
+
                                 </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Fee Details -->
+                        <h5 class="text-primary mb-3">Fee Details</h5>
+
+                        <div class="table-responsive">
+
+                            <table
+                                class="table table-bordered table-hover align-middle"
+                                formArrayName="invoiceItems">
+
+                                <thead class="table-primary">
+
+                                    <tr>
+                                        <th>Fee Type</th>
+                                        <th>Amount</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                        <th width="80">Action</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    <tr
+                                        *ngFor="let item of invoiceItems.controls; let i=index"
+                                        [formGroupName]="i">
+
+                                        <td>
+                                            <select
+                                                class="form-select"
+                                                formControlName="feeType">
+
+                                                <option value="">Select</option>
+
+                                                <option
+                                                    *ngFor="let fee of feeTypes"
+                                                    [value]="fee">
+
+                                                    {{fee}}
+
+                                                </option>
+
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input
+                                                class="form-control"
+                                                type="number"
+                                                formControlName="amount"
+                                                (input)="calculateTotal()">
+                                        </td>
+
+                                        <td>
+                                            <input
+                                                class="form-control"
+                                                type="number"
+                                                formControlName="discount"
+                                                (input)="calculateTotal()">
+                                        </td>
+
+                                        <td>
+                                            <input
+                                                class="form-control"
+                                                formControlName="total"
+                                                readonly>
+                                        </td>
+
+                                        <td class="text-center">
+
+                                            <button
+                                                class="btn btn-sm btn-outline-danger"
+                                                type="button"
+                                                (click)="removeFeeItem(i)">
+
+                                                <i class="bi bi-trash"></i>
+
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="text-end">
+
+                            <button
+                                class="btn btn-success"
+                                type="button"
+                                (click)="addFeeItem()">
+
+                                <i class="bi bi-plus-circle"></i>
+
+                                Add Fee
+
+                            </button>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Remarks & Total -->
+                        <div class="row g-3">
+
+                            <div class="col-12 col-lg-8">
+
+                                <label class="form-label">Remarks</label>
+
+                                <textarea
+                                    rows="4"
+                                    class="form-control"
+                                    formControlName="remarks">
+                                </textarea>
+
+                            </div>
+
+                            <div class="col-12 col-lg-4">
+
+                                <div class="card border-success">
+
+                                    <div class="card-body text-center">
+
+                                        <h6 class="text-muted">
+                                            Grand Total
+                                        </h6>
+
+                                        <h2 class="text-success">
+
+                                            ₹ {{grandTotal}}
+
+                                        </h2>
+
+                                    </div>
+
                                 </div>
 
-</div>
+                            </div>
 
-<hr>
+                        </div>
 
-<h5>Fee Details</h5>
+                        <hr>
 
-<table class="table table-bordered" formArrayName="invoiceItems">
+                        <!-- Buttons -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-<thead>
+                            <button
+                                *ngIf="isAdmin || isParent"
+                                class="btn btn-success"
+                                type="button"
+                                (click)="isAdmin ? saveInvoice() : makePayment()">
 
-<tr>
-<th>Fee Type</th>
-<th>Amount</th>
-<th>Discount</th>
-<th>Total</th>
-<th></th>
-</tr>
+                                <i class="bi bi-check-circle"></i>
 
-</thead>
+                                {{ isAdmin ? 'Add Invoice' : 'Make Payment' }}
 
-<tbody>
+                            </button>
 
-<tr *ngFor="let item of invoiceItems.controls; let i=index"
-[formGroupName]="i">
+                            <button
+                                class="btn btn-secondary"
+                                type="button">
 
-<td>
+                                <i class="bi bi-x-circle"></i>
 
-<select class="form-select" formControlName="feeType">
+                                Cancel
 
-<option value="">Select</option>
+                            </button>
 
-<option *ngFor="let fee of feeTypes">
-{{fee}}
-</option>
+                        </div>
 
-</select>
+                    </form>
 
-</td>
+                </div>
 
-<td>
-<input class="form-control"
-type="number"
-formControlName="amount"
-(input)="calculateTotal()">
-</td>
+            </div>
 
-<td>
-<input class="form-control"
-type="number"
-formControlName="discount"
-(input)="calculateTotal()">
-</td>
+        </div>
 
-<td>
-<input class="form-control"
-formControlName="total">
-</td>
-
-<td>
-<button class="btn btn-danger btn-sm"
-type="button"
-(click)="removeFeeItem(i)">
-Delete
-</button>
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-<button
-class="btn btn-success"
-type="button"
-(click)="addFeeItem()">
-Add Fee
-</button>
-
-<hr>
-
-<div class="row">
-
-<div class="col-md-8">
-<textarea
-rows="3"
-class="form-control"
-placeholder="Remarks"
-formControlName="remarks">
-</textarea>
-</div>
-
-<div class="col-md-4">
-
-<div class="alert alert-info">
-
-<h5>
-Grand Total :
-₹ {{grandTotal}}
-</h5>
+    </div>
 
 </div>
 
-</div>
-
-</div>
-
-<hr>
-
-<button
-  *ngIf="isAdmin || isParent"
-  class="btn btn-success"
-  type="button"
-  (click)="isAdmin ? saveInvoice() : makePayment()">
-
-  <i class="bi bi-pencil-square"></i>
-  {{ isAdmin ? 'Add Invoice' : 'Make Payment' }}
-
-</button>
-
-<button
-class="btn btn-secondary">
-
-Cancel
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-<app-modal-student-search (studentSelected)="onStudentSelected($event)"    ></app-modal-student-search>
-
+<app-modal-student-search
+    (studentSelected)="onStudentSelected($event)">
+</app-modal-student-search>
