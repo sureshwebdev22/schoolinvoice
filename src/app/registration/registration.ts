@@ -1,4 +1,4 @@
-import { Component,inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Auth } from '../services/auth';
@@ -8,7 +8,7 @@ import { Alertservice } from '../services/alertservice';
 
 @Component({
   selector: 'app-registration',
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './registration.html',
   styleUrl: './registration.css',
 })
@@ -19,10 +19,10 @@ export class Registration {
 
   private formBuilder = inject(FormBuilder);
   private authService = inject(Auth);
-  private router = inject(Router); 
+  private router = inject(Router);
   private alertService = inject(Alertservice);
 
-  constructor(  ) {
+  constructor() {
     this.registerForm = this.formBuilder.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.minLength(3)]],
@@ -31,32 +31,32 @@ export class Registration {
 
   }
 
-  
+
 
   register() {
 
     alert("reg");
-   
+
 
     this.authService.register(this.registerForm.value)
       .subscribe({
 
         next: () => {
 
-        //  alert("Registration Successful");
-                    this.alertService.success('Registration Successful')
+          this.alertService.success('Registration Successful')
 
-
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login']).then(() => {
+            this.alertService.clear();
+          });
 
         },
 
-        error: (err : any) => {
+        error: (err: any) => {
 
-         // alert(err.error.message);
+          // alert(err.error.message);
           this.alertService.error(err.error.message)
 
-  
+
         }
 
       });
