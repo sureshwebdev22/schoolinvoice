@@ -17,10 +17,13 @@ import { CreateInvoices } from './invoices/create-invoices/create-invoices';
 import { ListInvoices } from './invoices/list-invoices/list-invoices';
 import { ViewInvoice } from './invoices/view-invoice/view-invoice';
 import { CreatePayment } from './payments/create-payment/create-payment';
+import { Registration } from './registration/registration';
 
 export const routes: Routes = [
     { path: 'home', component: Home ,canActivate: [authGuard]},
     { path: 'login', component: Login },
+    { path: 'register', component: Registration },
+
     { path: 'students', component: Students ,canActivate: [authGuard]},
     { path: 'invoices', component: Invoices ,canActivate: [authGuard]},
     { path: 'myprofile', component: Myprofile ,canActivate: [authGuard]},

@@ -31,24 +31,15 @@ export class Alert {
         this.alert = alert;
         this.cdr.detectChanges();
 
-        if (this.timer) {
+        
 
-          clearTimeout(this.timer);
-
-        }
-
-        if (alert.message) {
-
-          this.timer = setTimeout(() => {
-
-            this.alertService.clear();
-
-          }, 3000);
-
-        }
 
       });
 
+  }
+
+   closeAlert() {
+    this.alertService.clear();
   }
 
 }

@@ -10,7 +10,7 @@ export class Auth {
   
   //private apiUrl = 'http://localhost:8080/api/auth/login';
 
-    private apiUrl = environment.apiUrl +'/auth/login';
+    private apiUrl = environment.apiUrl +'/auth';
 
 
   constructor(private http: HttpClient) { }
@@ -22,7 +22,7 @@ export class Auth {
   }
 
   login(loginForm: any): Observable<any> {
-      return this.http.post<any>(this.apiUrl, loginForm);
+      return this.http.post<any>(this.apiUrl+'/login', loginForm);
   }
 
   getRole(): string | null {
@@ -39,6 +39,14 @@ export class Auth {
     return response.role;
   }
 
+    register(user:any):Observable<any>{
+
+    return this.http.post(
+      this.apiUrl+"/register",
+      user
+    );
+
+  }
 
 
 
