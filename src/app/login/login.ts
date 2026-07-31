@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../services/auth';
+import { Alertservice } from '../services/alertservice'; 
 import { email } from '@angular/forms/signals';
 
 @Component({
@@ -20,6 +21,7 @@ export class Login {
   private formBuilder = inject(FormBuilder);
   private auth = inject(Auth);
   private router = inject(Router);
+  private alertService = inject(Alertservice);
 
   constructor() {
     this.loginForm = this.formBuilder.group({
@@ -45,8 +47,12 @@ export class Login {
        this.router.navigate(['/home']); // Navigate to dashboard on successful login 
       },
 
-      error: (err) => {
-        console.error(err);
+      error: (err:any) => {
+        console.log('err '+ err);
+        
+          console.error(JSON.stringify(err));
+
+          this.alertService.error(err.error.message          );
       }
     });
   }
