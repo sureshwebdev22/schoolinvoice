@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component , inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-header',
@@ -8,21 +10,41 @@ import { Router } from '@angular/router';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {
+export class Header implements OnInit {
 
 
   private router = inject(Router);
-logout():void {
 
-  localStorage.removeItem("token");
-  //this.router.navigate(['/login']);
-      this.router.navigateByUrl('/login');
+  username: string = '';
+
+  ngOnInit(): void {
+
+    this.loadUser();
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.loadUser();
+      });
+  }
+
+  loadUser(): void {
+    const data = JSON.parse(localStorage.getItem('token') || '{}');
+    this.username = data.fullName || '';
+  }
+
+  logout(): void {
+
+    localStorage.removeItem("token");
+    //this.router.navigate(['/login']);
+    this.username = '';
+    this.router.navigateByUrl('/login');
 
 
-}
+  }
 
 
-    isLoggedIn(): boolean {
+  isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
 
   }

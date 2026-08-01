@@ -36,6 +36,8 @@ export class Login {
       this.loginForm.value
     ).subscribe({
       next: (response: any) => {
+        console.log('Login successful:', response);
+       // this.alertService.success('Login Successful');
         localStorage.setItem(
           'token',
           JSON.stringify(response)
@@ -44,7 +46,7 @@ export class Login {
           'role',
           response.role
         );*/
-       this.router.navigate(['/home']); // Navigate to dashboard on successful login 
+       this.router.navigateByUrl('/home'); // Navigate to dashboard on successful login 
       },
 
       error: (err:any) => {
