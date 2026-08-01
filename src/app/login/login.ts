@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Auth } from '../services/auth';
 import { Alertservice } from '../services/alertservice'; 
 import { email } from '@angular/forms/signals';
+import { Authresponse } from '../models/authresponse';
 
 @Component({
   standalone: true,
@@ -35,7 +36,7 @@ export class Login {
     this.auth.login(
       this.loginForm.value
     ).subscribe({
-      next: (response: any) => {
+      next: (response: Authresponse) => {
         console.log('Login successful:', response);
        // this.alertService.success('Login Successful');
         localStorage.setItem(

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-
+import { Auth } from '../services/auth';
 
 @Component({
   selector: 'app-header',
@@ -10,35 +10,29 @@ import { filter } from 'rxjs/operators';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header implements OnInit {
+export class Header  {
+
+  userRole: string | null = null;
+  fullName: string | null = null;
 
 
   private router = inject(Router);
+  private authService = inject(Auth);
 
-  username: string = '';
 
   ngOnInit(): void {
-
-    this.loadUser();
-
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.loadUser();
-      });
+    this.authService.authResponse.subscribe(response => {
+      const authResponse = response as { fullName?: string | null } | null;
+      this.fullName = authResponse?.fullName ?? null;
+    });
   }
 
-  loadUser(): void {
-    const data = JSON.parse(localStorage.getItem('token') || '{}');
-    this.username = data.fullName || '';
-  }
+
 
   logout(): void {
 
-    localStorage.removeItem("token");
-    //this.router.navigate(['/login']);
-    this.username = '';
-    this.router.navigateByUrl('/login');
+    this.authService.logout1();
+   this.router.navigate(['/login']);
 
 
   }

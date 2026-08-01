@@ -35,7 +35,6 @@ export class Registration {
 
   register() {
 
-    alert("reg");
    
 
     this.authService.register(this.registerForm.value)
@@ -46,10 +45,11 @@ export class Registration {
         //  alert("Registration Successful");
           
 
-          this.router.navigate(['/login']);
           this.alertService.success('Registration Successful')
-
           
+          this.router.navigate(['/login']);
+
+
 
         },
 
