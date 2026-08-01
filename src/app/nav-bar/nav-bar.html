@@ -25,6 +25,7 @@ Dashboard
 </a>
 </li>
 
+<div *ngIf="isAdmin">
 <li class="nav-item">
 
 <a
@@ -70,7 +71,9 @@ Create User
 
 </div>
 
+
 </li>
+</div>
 
 <li class="nav-item">
 
@@ -89,6 +92,7 @@ Students
 
 <ul class="nav flex-column ms-4">
 
+
 <li>
 
 <a
@@ -100,9 +104,10 @@ Search Student
 </a>
 
 </li>
-
+<div *ngIf="isAdmin">
 <li>
 
+  
 <a
 href="student/create"
 class="nav-link text-blue">
@@ -112,7 +117,7 @@ Create Student
 </a>
 
 </li>
-
+</div>
 </ul>
 
 </div>
@@ -148,7 +153,7 @@ Search Invoices
 </a>
 
 </li>
-
+<div *ngIf="isAdmin">
 <li>
 
 <a
@@ -159,7 +164,9 @@ Create Invoices
 
 </a>
 
+
 </li>
+</div>
 
 
 

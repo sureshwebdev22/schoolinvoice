@@ -118,7 +118,13 @@ export class CreatePayment {
 
       transactionReference: this.paymentForm.value.transactionReference,
 
-      remarks: this.paymentForm.value.remarks
+      remarks: this.paymentForm.value.remarks,
+
+      studentId: this.invoice.studentDTO.id,
+
+      studentName: this.invoice.studentDTO.firstName + ',' + this.invoice.studentDTO.lastName,
+      
+      invoiceNumber: this.invoice.invoiceNumber
 
     };
 

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Alertservice } from '../services/alertservice';
 import { timer } from 'rxjs';
+import { Auth } from '../services/auth';
 
 
 
@@ -18,21 +19,32 @@ import { timer } from 'rxjs';
 })
 export class Students implements OnInit {
   //
-    loading = false;
+  loading = false;
   students: any[] = [];
-
+  role: string | null = null;
+  private authService = inject(Auth);
+  isAdmin = false;
+  isParent =false
   ngOnInit(): void {
     this.loading = false;
+    this.role = this.authService.getRole(); // Call getRole() to ensure the role is set
+    if(this.role){
+      this.isAdmin = this.role === 'ROLE_SCHOOL_ADMIN';
+      this.isParent = this.role === 'ROLE_PARENT';
     }
+    console.log('User role:', this.role); // Log the role for debugging
+  //  this.loadStudents();
+  }
 
 
   private router = inject(Router);
   private studentService = inject(StudentServices);
   private alertService = inject(Alertservice);
+  private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
   studentSearchForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
 
     this.studentSearchForm = this.fb.group({
       searchText: ['']
