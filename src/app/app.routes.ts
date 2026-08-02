@@ -18,6 +18,7 @@ import { ListInvoices } from './invoices/list-invoices/list-invoices';
 import { ViewInvoice } from './invoices/view-invoice/view-invoice';
 import { CreatePayment } from './payments/create-payment/create-payment';
 import { Registration } from './registration/registration';
+import { SearchPayments } from './search-payments/search-payments';
 
 export const routes: Routes = [
     { path: 'home', component: Home ,canActivate: [authGuard]},
@@ -40,5 +41,7 @@ export const routes: Routes = [
     {path :'invoices/list-invoice/:id', component: ViewInvoice ,canActivate: [authGuard]},    
     {path: 'invoices/create', component: CreateInvoices ,canActivate: [authGuard]},
     {path:'payment/create/:id',component:CreatePayment,canActivate:[authGuard]},
+    {path:'payment/create',component:CreatePayment,canActivate:[authGuard]},
+    {path: 'payment/list', component: SearchPayments ,canActivate: [authGuard]},
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

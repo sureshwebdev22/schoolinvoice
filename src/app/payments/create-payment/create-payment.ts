@@ -72,6 +72,7 @@ export class CreatePayment {
           this.invoice.totalAmount = response.totalAmount;
           this.invoice.balanceAmount =response.balanceAmount;
           this.invoice.paidAmount = response.paidAmount;
+          this.invoice.parentId =response.parentId;
           this.cdr.detectChanges();
 
         },
@@ -124,7 +125,9 @@ export class CreatePayment {
 
       studentName: this.invoice.studentDTO.firstName + ',' + this.invoice.studentDTO.lastName,
       
-      invoiceNumber: this.invoice.invoiceNumber
+      invoiceNumber: this.invoice.invoiceNumber,
+
+      parentId:this.invoice.parentId
 
     };
 

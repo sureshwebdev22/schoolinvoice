@@ -21,5 +21,17 @@ export class Payments {
   getPaymentHistory(invoiceId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/invoice/${invoiceId}`);
   }
+  getPayments(page: number, size: number, searchText: string): Observable<any> {
+    const params = {
+      page: page.toString(),
+      size: size.toString(),
+      searchText: searchText || ''
+    };
+    return this.http.get<any>(this.apiUrl, { params });
+  }
+
+  deletePayment(paymentId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${paymentId}`);
+  } 
 
 }
