@@ -1,4 +1,5 @@
 import { Injectable, ChangeDetectorRef, inject } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
 import { Subject } from 'rxjs';
 
 export interface Alert {
@@ -17,6 +18,18 @@ export class Alertservice {
   private subject = new Subject<Alert>();
 
   alert$ = this.subject.asObservable();
+
+  constructor(private router: Router) {
+        // clear alert messages on route change unless 'showAfterRedirect' flag is true
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationStart) {
+                    // only keep for a single route change
+                    // clear alert message
+                    this.clear();
+                }
+            }
+        );
+    }
 
   success(message: string) {
 
