@@ -1,0 +1,12 @@
+<input type="file" (change)="upload($event)" accept=".csv">
+
+<div class="progress mt-3" *ngIf="uploading">
+    <div class="progress-bar progress-bar-striped progress-bar-animated"
+         [style.width.%]="progress">
+        {{progress}}%
+    </div>
+</div>
+
+<div *ngIf="message">
+    {{message}}
+</div>

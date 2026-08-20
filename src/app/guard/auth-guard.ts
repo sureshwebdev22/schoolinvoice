@@ -1,17 +1,48 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { Auth } from '../services/auth';
 
-export const authGuard: CanActivateFn = (route, state) => {
+import {
+  CanActivateFn,
+  Router
+} from '@angular/router';
 
-  const authservice = inject(Auth);
-  const router = inject(Router);
+import {
+  OidcSecurityService
+} from 'angular-auth-oidc-client';
 
-  if(authservice.isAuthenticated()){ 
-    return true;
-  }
-  else{
-    return router.navigate(['/login']);
-  }
-  
+import {
+  map
+} from 'rxjs/operators';
+
+
+export const authGuard: CanActivateFn = () => {
+
+  return localStorage.getItem('token') ? true : inject(Router).createUrlTree(['/login']);
+/*
+  const oidc =
+    inject(OidcSecurityService);
+
+  const router =
+    inject(Router);
+
+
+  return oidc
+    .isAuthenticated()
+    .pipe(
+
+      map(result => {
+
+        if (result) {
+
+          return true;
+
+        }
+
+        return router.createUrlTree([
+          '/login'
+        ]);
+
+      })
+
+    );*/
+
 };

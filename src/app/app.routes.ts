@@ -19,9 +19,14 @@ import { ViewInvoice } from './invoices/view-invoice/view-invoice';
 import { CreatePayment } from './payments/create-payment/create-payment';
 import { Registration } from './registration/registration';
 import { SearchPayments } from './search-payments/search-payments';
+import { BulkUploadCreate } from './bulk-upload-create/bulk-upload-create';
+import { AuthCallback } from './auth/callback/auth-callback';
 
 export const routes: Routes = [
-    { path: 'home', component: Home ,canActivate: [authGuard]},
+    { path: 'home', component: Home },
+    {
+  path: 'auth/callback',
+  component: AuthCallback },
     { path: 'login', component: Login },
     { path: 'register', component: Registration },
 
@@ -43,5 +48,6 @@ export const routes: Routes = [
     {path:'payment/create/:id',component:CreatePayment,canActivate:[authGuard]},
     {path:'payment/create',component:CreatePayment,canActivate:[authGuard]},
     {path: 'payment/list', component: SearchPayments ,canActivate: [authGuard]},
+    {path: 'bulkupload/create', component: BulkUploadCreate ,canActivate: [authGuard]},
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

@@ -30,11 +30,20 @@ export class Header  {
 
 
   logout(): void {
+     // Clear session storage
+  if (window.sessionStorage) {
+    window.sessionStorage.clear();
+  }
+
+  window.location.href = "https://ap-south-1rb2vh3m1f.auth.ap-south-1.amazoncognito.com/logout?client_id=10vjnb8ggtj00gf5q5fvbghj45&logout_uri=http://localhost:4200/login";
+
+/*
+    
 
     this.authService.logout1();
    this.router.navigate(['/login']);
 
-
+*/
   }
 
 
