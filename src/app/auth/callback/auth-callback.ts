@@ -1,4 +1,7 @@
 import { Component, inject } from '@angular/core';
+import { AuthApiService } from '../../services/auth-api.service';
+import { CurrentUser } from '../../models/CurrentUser';
+import { CurrentUserService } from '../../services/current-user-service';
 
 import {
   OidcSecurityService
@@ -24,6 +27,11 @@ export class AuthCallback {
 
   private oidc =
     inject(OidcSecurityService);
+
+  private authApiService = inject(AuthApiService);
+
+  private currentUserService = inject(CurrentUserService);
+
 
   private router =
     inject(Router);
@@ -55,7 +63,51 @@ export class AuthCallback {
 
         }
 
-      });
+         // Call GET /api/auth/me
+          this.currentUserService.loadCurrentUser()
+            .subscribe({
+              next: (user: CurrentUser) => {
 
-  }
+                console.log(
+                  'Current user:',
+                  user
+                );
+
+                console.log(
+                  'Email:',
+                  user.email
+                );
+
+                console.log(
+                  'Cognito Sub:',
+                  user.cognitoSub
+                );
+
+                console.log(
+                  'Roles:',
+                  user.roles
+                );
+
+                this.router.navigate([
+                  '/dashboard'
+                ]);
+              },
+
+              error: error => {
+
+                console.error(
+                  'GET /api/auth/me failed:',
+                  error
+                );
+
+                this.router.navigate([
+                  '/unauthorized'
+                ]);
+              }
+            });
+        
+
+
+      });
+}
 }

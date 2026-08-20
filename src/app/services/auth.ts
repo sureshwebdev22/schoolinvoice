@@ -18,7 +18,7 @@ export class Auth {
 
 
   constructor(private http: HttpClient) { 
-  //  this.authResponseSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token')!));
+   this.authResponseSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token')!));
   const auth = localStorage.getItem('token');
 
   this.authResponseSubject = new BehaviorSubject<Authresponse | null>(

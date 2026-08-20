@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Auth } from '../services/auth';
+import { CurrentUserService } from '../services/current-user-service';
+import { CurrentUser } from '../models/CurrentUser';
 
 @Component({
   selector: 'app-header',
@@ -11,25 +13,64 @@ import { Auth } from '../services/auth';
   styleUrl: './header.css',
 })
 export class Header  {
+  
 
-  userRole: string | null = null;
-  fullName: string | null = null;
+  private currentUserService = inject(CurrentUserService);
+  private cdr = inject(ChangeDetectorRef);
 
+  email: string | null = null;
 
-  private router = inject(Router);
-  private authService = inject(Auth);
-
+  
 
   ngOnInit(): void {
-    this.authService.authResponse.subscribe(response => {
-      const authResponse = response as { fullName?: string | null } | null;
-      this.fullName = authResponse?.fullName ?? null;
-    });
+    {
+
+
+    this.currentUserService.user$
+      .subscribe({
+        next: (user: any) => {
+
+          console.log(
+            'Header received user:',
+            user
+          );
+
+          
+
+
+          if (user) {
+
+        //    this.fullName = user.fullName;
+            this.email = user.email;
+            this.cdr.detectChanges();
+
+            
+
+          } else {
+
+       //     this.fullName = null;
+            this.email = null;
+          }
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Current user subscription error:',
+            error
+          );
+
+        }
+        
+      });
+  }
   }
 
 
 
   logout(): void {
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
      // Clear session storage
   if (window.sessionStorage) {
     window.sessionStorage.clear();
